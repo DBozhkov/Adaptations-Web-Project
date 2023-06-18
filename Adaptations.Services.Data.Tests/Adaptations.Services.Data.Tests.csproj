@@ -31,8 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data\AspNetCoreTemplate.Data\Adaptations.Data.csproj" />
-    <ProjectReference Include="..\Services\AspNetCoreTemplate.Services.Data\Adaptations.Services.Data.csproj" />
+    <ProjectReference Include="..\Data\Adaptations.Data\Adaptations.Data.csproj" />
+    <ProjectReference Include="..\Services\Adaptations.Services.Data\Adaptations.Services.Data.csproj" />
   </ItemGroup>
 
 </Project>

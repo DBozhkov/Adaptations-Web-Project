@@ -5,42 +5,44 @@ VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{E389DEB6-5F90-444B-A054-12A10D39C76F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Web", "Web\AspNetCoreTemplate.Web\Adaptations.Web.csproj", "{B90D1067-FE4C-400E-BA78-5413E30AB9ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Web", "Web\Adaptations.Web\Adaptations.Web.csproj", "{B90D1067-FE4C-400E-BA78-5413E30AB9ED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{ACBE44C4-E198-45E2-BA02-6655250A0006}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Data.Models", "Data\AspNetCoreTemplate.Data.Models\Adaptations.Data.Models.csproj", "{E9FDB52F-52DC-48B2-86E1-0176377BB53F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Data.Models", "Data\Adaptations.Data.Models\Adaptations.Data.Models.csproj", "{E9FDB52F-52DC-48B2-86E1-0176377BB53F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{516E002B-9E6E-4456-B7F6-EAA353966DE6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7A731632-6714-44E2-A9E4-069EBA9E666C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Services", "Services\AspNetCoreTemplate.Services\Adaptations.Services.csproj", "{8522212F-F01E-4E20-9975-FCF5E10D71DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Services", "Services\Adaptations.Services\Adaptations.Services.csproj", "{8522212F-F01E-4E20-9975-FCF5E10D71DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Services.Messaging", "Services\AspNetCoreTemplate.Services.Messaging\Adaptations.Services.Messaging.csproj", "{43FDC0C4-F250-45DE-93F8-3CA8A9247CC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Services.Messaging", "Services\Adaptations.Services.Messaging\Adaptations.Services.Messaging.csproj", "{43FDC0C4-F250-45DE-93F8-3CA8A9247CC9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Data", "Data\AspNetCoreTemplate.Data\Adaptations.Data.csproj", "{4B844ECB-E845-49A6-8B31-85E577933598}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Data", "Data\Adaptations.Data\Adaptations.Data.csproj", "{4B844ECB-E845-49A6-8B31-85E577933598}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Data.Common", "Data\AspNetCoreTemplate.Data.Common\Adaptations.Data.Common.csproj", "{D0D59508-CF8B-4656-A344-396C530BB9DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Data.Common", "Data\Adaptations.Data.Common\Adaptations.Data.Common.csproj", "{D0D59508-CF8B-4656-A344-396C530BB9DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Common", "AspNetCoreTemplate.Common\Adaptations.Common.csproj", "{A2288C46-0FBF-43B6-80B6-3072FD65BC32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Web.Infrastructure", "Web\Adaptations.Web.Infrastructure\Adaptations.Web.Infrastructure.csproj", "{7A7A7986-1F5B-4EBD-9B17-8B41F8FABA58}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Web.Infrastructure", "Web\AspNetCoreTemplate.Web.Infrastructure\Adaptations.Web.Infrastructure.csproj", "{7A7A7986-1F5B-4EBD-9B17-8B41F8FABA58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Services.Data", "Services\Adaptations.Services.Data\Adaptations.Services.Data.csproj", "{4D39C126-3FB5-4B26-B08C-1BF48EFFA23E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Services.Data", "Services\AspNetCoreTemplate.Services.Data\Adaptations.Services.Data.csproj", "{4D39C126-3FB5-4B26-B08C-1BF48EFFA23E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Services.Mapping", "Services\AspNetCoreTemplate.Services.Mapping\Adaptations.Services.Mapping.csproj", "{415FD7FA-0453-4FE1-9A29-C6E1D8B45C3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Services.Mapping", "Services\Adaptations.Services.Mapping\Adaptations.Services.Mapping.csproj", "{415FD7FA-0453-4FE1-9A29-C6E1D8B45C3D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox", "Tests\Sandbox\Sandbox.csproj", "{8AB6B92A-0837-4BDE-B950-10BE3FF2B6A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adaptations.Web.Tests", "Adaptations.Web.Tests\Adaptations.Web.Tests.csproj", "{58F89701-7A93-41A5-AF5A-88AF0A125CE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Web.Tests", "Adaptations.Web.Tests\Adaptations.Web.Tests.csproj", "{58F89701-7A93-41A5-AF5A-88AF0A125CE8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", "{01A465C1-0EF6-4FA5-A6FA-10B06C37EFE0}"
 	ProjectSection(SolutionItems) = preProject
 		launchSettings.json = launchSettings.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adaptations.Services.Data.Tests", "Adaptations.Services.Data.Tests\Adaptations.Services.Data.Tests.csproj", "{BF1FF52B-1A96-40DC-8AEE-5F8BD93F7197}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Services.Data.Tests", "Adaptations.Services.Data.Tests\Adaptations.Services.Data.Tests.csproj", "{BF1FF52B-1A96-40DC-8AEE-5F8BD93F7197}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "﻿Adaptations.Common", "﻿Adaptations.Common\﻿Adaptations.Common.csproj", "{399CE7F9-525B-4F1E-8E3D-3456851F670A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adaptations.Web.ViewModels", "Web\Adaptations.Web.ViewModels\Adaptations.Web.ViewModels.csproj", "{5B684DC1-C40C-44D5-B958-6F865E047C1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,10 +74,6 @@ Global
 		{D0D59508-CF8B-4656-A344-396C530BB9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0D59508-CF8B-4656-A344-396C530BB9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0D59508-CF8B-4656-A344-396C530BB9DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2288C46-0FBF-43B6-80B6-3072FD65BC32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2288C46-0FBF-43B6-80B6-3072FD65BC32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2288C46-0FBF-43B6-80B6-3072FD65BC32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2288C46-0FBF-43B6-80B6-3072FD65BC32}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7A7A7986-1F5B-4EBD-9B17-8B41F8FABA58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A7A7986-1F5B-4EBD-9B17-8B41F8FABA58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A7A7986-1F5B-4EBD-9B17-8B41F8FABA58}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -100,6 +98,14 @@ Global
 		{BF1FF52B-1A96-40DC-8AEE-5F8BD93F7197}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF1FF52B-1A96-40DC-8AEE-5F8BD93F7197}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF1FF52B-1A96-40DC-8AEE-5F8BD93F7197}.Release|Any CPU.Build.0 = Release|Any CPU
+		{399CE7F9-525B-4F1E-8E3D-3456851F670A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{399CE7F9-525B-4F1E-8E3D-3456851F670A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{399CE7F9-525B-4F1E-8E3D-3456851F670A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{399CE7F9-525B-4F1E-8E3D-3456851F670A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B684DC1-C40C-44D5-B958-6F865E047C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B684DC1-C40C-44D5-B958-6F865E047C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B684DC1-C40C-44D5-B958-6F865E047C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B684DC1-C40C-44D5-B958-6F865E047C1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +124,7 @@ Global
 		{58F89701-7A93-41A5-AF5A-88AF0A125CE8} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
 		{01A465C1-0EF6-4FA5-A6FA-10B06C37EFE0} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
 		{BF1FF52B-1A96-40DC-8AEE-5F8BD93F7197} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
+		{5B684DC1-C40C-44D5-B958-6F865E047C1D} = {E389DEB6-5F90-444B-A054-12A10D39C76F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {384484BE-4680-4529-9CC2-AD37BA4D12D1}

@@ -32,14 +32,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AspNetCoreTemplate.Common\Adaptations.Common.csproj" />
-    <ProjectReference Include="..\..\Data\AspNetCoreTemplate.Data.Common\Adaptations.Data.Common.csproj" />
-    <ProjectReference Include="..\..\Data\AspNetCoreTemplate.Data.Models\Adaptations.Data.Models.csproj" />
-    <ProjectReference Include="..\..\Data\AspNetCoreTemplate.Data\Adaptations.Data.csproj" />
-    <ProjectReference Include="..\..\Services\AspNetCoreTemplate.Services.Data\Adaptations.Services.Data.csproj" />
-    <ProjectReference Include="..\..\Services\AspNetCoreTemplate.Services.Mapping\Adaptations.Services.Mapping.csproj" />
-    <ProjectReference Include="..\..\Services\AspNetCoreTemplate.Services.Messaging\Adaptations.Services.Messaging.csproj" />
-    <ProjectReference Include="..\..\Services\AspNetCoreTemplate.Services\Adaptations.Services.csproj" />
+    <ProjectReference Include="..\..\Data\Adaptations.Data.Common\Adaptations.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\Adaptations.Data.Models\Adaptations.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\Adaptations.Data\Adaptations.Data.csproj" />
+    <ProjectReference Include="..\..\Services\Adaptations.Services.Data\Adaptations.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\Adaptations.Services.Mapping\Adaptations.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\Adaptations.Services.Messaging\Adaptations.Services.Messaging.csproj" />
+    <ProjectReference Include="..\..\Services\Adaptations.Services\Adaptations.Services.csproj" />
+    <ProjectReference Include="..\..\﻿Adaptations.Common\﻿Adaptations.Common.csproj" />
   </ItemGroup>
 
 </Project>
