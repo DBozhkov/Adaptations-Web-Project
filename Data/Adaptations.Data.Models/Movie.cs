@@ -21,6 +21,8 @@ namespace Adaptations.Data.Models
 
         public int ReleaseYear { get; set; }
 
+        public string MoviePlot { get; set; }
+
         public double Rating { get; set; }
 
         public MovieGenre Genre { get; set; }

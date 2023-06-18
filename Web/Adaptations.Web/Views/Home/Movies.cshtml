@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Adaptations.Web.ViewModels.Movies.MovieInputModel
+
+@{
     this.ViewData["Title"] = "Movies";
 }
 
@@ -6,3 +8,8 @@
 <div class="row">
     <div class="col-lg-12 alert-success"> Best place ever!!!</div>
 </div>
+
+<ul>
+    <li><a asp-controller="Movies" asp-action="Add">Add a movie</a></li>
+    <!-- Add more menu items as needed -->
+</ul>

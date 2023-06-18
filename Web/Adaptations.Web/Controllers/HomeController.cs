@@ -19,7 +19,7 @@
 
         public IActionResult Movies()
         {
-            return this.View();
+            return this.RedirectToAction("Add", "Movies");
         }
 
         public IActionResult Books()
