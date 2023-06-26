@@ -1,23 +1,23 @@
 ﻿.navbar-nav > li {
-    display: inline-block;
-    vertical-align: middle; /* Align items vertically in the middle */
+  display: inline-block;
+  vertical-align: middle;
 }
 
-    .navbar-nav > li > a {
-        display: inline-block; /* Display the links as inline-block */
-        padding: 15px;
-        font-size: 16px;
-        vertical-align: middle; /* Align text vertically in the middle */
-    }
+.navbar-nav > li > a {
+  display: inline-block;
+  padding: 15px;
+  font-size: 16px;
+  vertical-align: middle;
+}
 
 #menuButton {
-    display: inline-flex;
-    align-items: center;
-    margin-top: 10px; /* Add margin to move the menu down */
-    margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 #header {
-    margin-left: 10px;
-    font-size: 20px;
+  margin-left: 10px;
+  font-size: 20px;
 }

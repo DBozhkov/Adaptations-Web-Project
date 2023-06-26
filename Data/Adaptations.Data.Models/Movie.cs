@@ -29,6 +29,10 @@ namespace Adaptations.Data.Models
 
         public virtual ICollection<Image> Images { get; set; }
 
+        public string AddedByUserId { get; set; }
+
+        public virtual ApplicationUser AddedByUser { get; set; }
+
         public virtual ICollection<ActorMovie> ActorsMovies { get; set; }
 
         public virtual ApplicationUser User { get; set; }

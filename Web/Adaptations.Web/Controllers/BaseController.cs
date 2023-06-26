@@ -4,5 +4,10 @@
 
     public class BaseController : Controller
     {
+        public IActionResult Index()
+        {
+            return this.View();
+        }
+
     }
 }

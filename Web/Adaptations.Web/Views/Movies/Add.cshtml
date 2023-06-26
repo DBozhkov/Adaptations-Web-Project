@@ -1,5 +1,5 @@
 ﻿@using Adaptations.Data.Models.Enums
-@model Adaptations.Web.ViewModels.Movies.MovieInputModel
+@model Adaptations.Web.ViewModels.Movies.CreateMovieInputModel
 
 <h1>Add a new Movie!</h1>
 
@@ -8,15 +8,41 @@
         <label asp-for="MovieName">Please enter a movie name:</label>
         <input asp-for="MovieName" class="form-control" />
         <span asp-validation-for="MovieName" class="text-danger"></span>
+    </div>
 
+    <div class="form-group">
+        <label asp-for="ReleaseYear">Movie release year:</label>
+        <input asp-for="ReleaseYear" class="form-control" />
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
         <label asp-for="MoviePlot">Please enter a movie plot:</label>
         <textarea asp-for="MoviePlot" class="form-control"></textarea>
         <span asp-validation-for="MoviePlot" class="text-danger"></span>
+    </div>
 
-        <label asp-for="Genre">Please enter a movie name:</label>
+    <div class="form-group">
+        <label asp-for="Genre">Please enter a movie genre:</label>
         <select asp-for="Genre" class="form-control" asp-items="@Html.GetEnumSelectList<MovieGenre>()"></select>
         <span asp-validation-for="Genre" class="text-danger"></span>
     </div>
 
+    <div class="form-group">
+        <label asp-for="Rating">Movie rating:</label>
+        <input asp-for="Rating" class="form-control" />
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Images"></label>
+        <input asp-for="Images" class="form-control" />
+        <span asp-validation-for="Images" class="text-danger"></span>
+    </div>
+
     <button type="submit" class="btn btn-primary">Add Movie</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

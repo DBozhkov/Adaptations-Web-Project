@@ -1,0 +1,33 @@
+﻿@model Adaptations.Web.ViewModels.Movies.ListAllMovies
+
+@{
+    this.ViewData["Title"] = "All Movies, page " + Model.PageNumber;
+}
+
+
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
+
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+<div class="row">
+    @foreach (var movie in this.Model.Movies)
+    {
+        <div class="media col-md-4">
+            <img src="@movie.ImageUrl" width="100" class="mr-3 img-responsive" alt="img">
+            <div class="media-body">
+                <h5 class="mt-0"><a asp-action="ById" asp-route-id="@movie.MovieId">@movie.MovieName</a></h5>
+                <div>@movie.ReleaseYear</div>
+                <div>@movie.MoviePlot</div>
+                <div>@movie.Rating</div>
+                <div>@movie.Genre</div>
+            </div>
+        </div>
+    }
+</div>
+<hr />
+
+<partial name="_PagingPartial" model="@Model" />

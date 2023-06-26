@@ -18,16 +18,10 @@ namespace Adaptations.Data.Models
 
         public string Extension { get; set; }
 
-        [ForeignKey(nameof(Actor))]
-        public int ActorId { get; set; }
-        public virtual Actor Actor { get; set; }
+        public string RemoteImageUrl { get; set; }
 
-        [ForeignKey(nameof(Movie))]
-        public int MovieId { get; set; }
-        public virtual Movie Movie { get; set; }
+        public string AddedByUserId { get; set; }
 
-        [ForeignKey(nameof(Book))]
-        public int BookId { get; set; }
-        public virtual Book Book { get; set; }
+        public ApplicationUser AddedByUser { get; set; }
     }
 }

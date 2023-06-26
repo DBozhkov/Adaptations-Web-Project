@@ -19,7 +19,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
                 <a id="menuButton" href="#">
@@ -41,7 +41,6 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Adaptations</a>
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -52,8 +51,8 @@
 
         <div id="menuContent" style="display: none;">
             <ul>
-                <li class="list-unstyled"><a asp-controller="Home" asp-action="Movies">Movies</a></li>
-                <li class="list-unstyled"><a asp-controller="Home" asp-action="Books">Books</a></li>
+                <li class="list-unstyled"><a asp-controller="Movies" asp-action="Index">Movies</a></li>
+                <li class="list-unstyled"><a asp-controller="Books" asp-action="Index">Books</a></li>
                 <!-- Add more menu items as needed -->
             </ul>
         </div>
@@ -63,12 +62,17 @@
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
-        @this.RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Adaptations.Web</p>
-        </footer>
+        <main role="main" class="pb-3">
+            @this.RenderBody()
+        </main>
     </div>
+
+    <footer>
+        <div class="footer">
+            <p>&copy; @DateTime.Now.Year - Adaptations.Web</p>
+        </div>
+    </footer>
+
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

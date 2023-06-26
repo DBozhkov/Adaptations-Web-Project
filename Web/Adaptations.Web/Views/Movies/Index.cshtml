@@ -1,7 +1,12 @@
 ﻿@model Adaptations.Web.ViewModels.Movies.MovieInputModel
 
 @{
-    this.ViewData["Title"] = "Movies";
+    this.ViewData["Title"] = "Movies Page";
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
 }
 
 <h1>Mitko's Movies!</h1>
@@ -11,5 +16,6 @@
 
 <ul>
     <li><a asp-controller="Movies" asp-action="Add">Add a movie</a></li>
+    <li><a asp-controller="Movies" asp-action="All">All movies!</a></li>
     <!-- Add more menu items as needed -->
 </ul>

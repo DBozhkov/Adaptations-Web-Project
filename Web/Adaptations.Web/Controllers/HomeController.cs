@@ -1,6 +1,7 @@
 ﻿namespace Adaptations.Web.Controllers
 {
     using Adaptations.Services.Data;
+    using Adaptations.Web.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
@@ -10,22 +11,6 @@
         public HomeController(IGetCountService countService)
         {
             this.countService = countService;
-        }
-
-        public IActionResult Index()
-        {
-            return this.View();
-        }
-
-        public IActionResult Movies()
-        {
-            return this.RedirectToAction("Add", "Movies");
-        }
-
-        public IActionResult Books()
-        {
-            var model = this.countService.GetAllCount();
-            return this.View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

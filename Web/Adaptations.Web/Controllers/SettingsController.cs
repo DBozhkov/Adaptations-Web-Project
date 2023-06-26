@@ -31,7 +31,7 @@
         {
             var random = new Random();
             var setting = new Setting { Name = $"Name_{random.Next()}", Value = $"Value_{random.Next()}" };
-            this.repository.Add(setting);
+            this.repository.AddAsync(setting);
 
             await this.repository.SaveChangesAsync();
 

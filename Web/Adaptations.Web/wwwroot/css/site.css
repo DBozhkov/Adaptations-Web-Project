@@ -1,19 +1,41 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.container {
+    flex: 1;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.container.body-content {
+    width: 98.9%;
+}
+.navbar {
+    background-color: #333;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    padding: 15px 0;
+}
+
+ul.nav.navbar-nav.navbar-right {
+    justify-content: flex-end;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,
 textarea {
+    width: 100%;
     max-width: 280px;
 }
 
@@ -53,3 +75,12 @@ textarea {
         display: none;
     }
 }
+
+footer {
+    background-color: #f5f5f5;
+    padding: 15px;
+    text-align: center;
+    margin-top: auto;
+}
+
+
