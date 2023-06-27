@@ -28,12 +28,23 @@
             this.environment = environment;
         }
 
-        public async Task<IActionResult> All(ListAllMovies allMovies)
+        public async Task<IActionResult> All(int id = 1)
         {
-            var movies = await this.moviesService.GetAllMoviesAsync();
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int ItemsPerPage = 9;
+
+            var movies = await this.moviesService.GetAllMoviesAsync<AllMoviesViewModel>(id, ItemsPerPage);
+
 
             var movielist = new ListAllMovies
             {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = id,
+                MoviesCount = this.moviesService.GetCount(),
                 Movies = movies,
             };
             return this.View(movielist);
@@ -56,7 +67,7 @@
 
             try
             {
-                await this.moviesService.CreateAsync(model, user.Id /*$"{this.environment.WebRootPath}/images"*/);
+                await this.moviesService.CreateAsync(model, user.Id, $"{this.environment.WebRootPath}/images");
             }
             catch (Exception ex)
             {
@@ -64,7 +75,7 @@
                 return this.View(model);
             }
 
-            this.TempData["Message"] = "Recipe added successfully.";
+            this.TempData["Message"] = "Movie added successfully.";
 
             return this.RedirectToAction("All");
         }
