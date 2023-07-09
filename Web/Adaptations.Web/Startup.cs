@@ -97,8 +97,8 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISmsSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
-            services.AddTransient<IGetCountService, GetCountService>();
             services.AddTransient<IMoviesService, MoviesService>();
+            services.AddTransient<IBooksService, BooksService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

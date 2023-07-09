@@ -7,14 +7,14 @@ namespace Adaptations.Services.Data
     public interface IMoviesService
     {
         Task CreateAsync(CreateMovieInputModel inputMovie, string userId, string imagePath);
-        Task<MovieViewModel> GetMovieByIdAsync(int id);
+        T GetMovieById<T>(int id);
         Task<IEnumerable<T>> GetAllMoviesAsync<T>(int page, int itemsPerPage = 9);
         int GetCount();
         Task<IEnumerable<T>> GetRandom<T>(int count);
-        Task<IEnumerable<MovieViewModel>> GetMoviesBySearchResult(string searchResult, int? movieId);
-        Task DeleteByIdAsync(int id);
-        Task EditAsync(MovieViewModel model);
-        Task<IEnumerable<MovieViewModel>> GetAllMoviesByBook();
-        Task<IEnumerable<MovieViewModel>> GetAllMoviesByActor();
+        Task<IEnumerable<T>> GetMoviesBySearchResult<T>(string searchResult);
+        Task DeleteByIdAsync(int? id);
+        Task EditAsync(int? id, EditMovieInputModel model);
+        Task<IEnumerable<T>> GetAllBooksByMovieId<T>(int id);
+        Task<IEnumerable<T>> GetAllActorsByMovieId<T>(int id);
     }
 }

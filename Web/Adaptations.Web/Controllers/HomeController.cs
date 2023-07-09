@@ -6,11 +6,8 @@
 
     public class HomeController : BaseController
     {
-        private readonly IGetCountService countService;
-
-        public HomeController(IGetCountService countService)
+        public HomeController()
         {
-            this.countService = countService;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

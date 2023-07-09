@@ -1,0 +1,83 @@
+﻿@using Adaptations.Data.Models.Enums
+@model Adaptations.Web.ViewModels.Books.CreateBookInputModel
+
+@{
+    this.ViewData["Title"] = "Add book";
+}
+
+
+<h1>Add a new Book!</h1>
+
+<form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+    <h1>@this.ViewData["Title"]</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Title">Please enter a book title:</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReleaseYear">Book release year:</label>
+        <input asp-for="ReleaseYear" class="form-control" />
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Please enter a book description:</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Genre">Please enter a book genre:</label>
+        <select asp-for="Genre" class="form-control" asp-items="@Html.GetEnumSelectList<BookGenre>()"></select>
+        <span asp-validation-for="Genre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AuthorName">Please enter a book author:</label>
+        <input asp-for="AuthorName" class="form-control" />
+        <span asp-validation-for="AuthorName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AuthorBiography">Please enter author's bio:</label>
+        <textarea asp-for="AuthorBiography" class="form-control"></textarea>
+        <span asp-validation-for="AuthorBiography" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BooksSold">Number of books sold:</label>
+        <input asp-for="BooksSold" class="form-control" />
+        <span asp-validation-for="BooksSold" class="text-danger"></span>
+    </div>
+
+    <h3>Characters</h3>
+
+    <div id="CharactersContainer">
+        <label asp-for="Characters"></label>
+        <a class="btn btn-success" onclick="AddMoreCharacters()">+</a>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Images">Book images:</label>
+        <input asp-for="Images" type="file" class="form-control" multiple />
+        <span asp-validation-for="Images" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Book</button>
+</form>
+
+@section Scripts {
+    <script>
+        var characterIndex = 0;
+        function AddMoreCharacters() {
+            $("#CharactersContainer").
+                append("<div class='form-control'>Name: <input type='text' name='Characters[" + characterIndex + "].CharacterName' /> Description: <input type='text' name='Characters[" + characterIndex + "].Description' /></div>");
+            characterIndex++;
+        }
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}

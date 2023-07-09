@@ -13,7 +13,7 @@
 
         public string Name { get; set; }
 
-        public BookGenre Genre { get; set; }
+        public string Biography { get; set; }
 
         public virtual ICollection<Book> Books { get; set; }
     }

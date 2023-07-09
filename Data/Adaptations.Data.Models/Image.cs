@@ -12,7 +12,6 @@ namespace Adaptations.Data.Models
         {
             this.Id = Guid.NewGuid().ToString();
         }
-        public string ImageId { get; set; }
 
         public byte[] ImageData { get; set; }
 

@@ -34,7 +34,7 @@ namespace Adaptations.Services.Data
                 AddedByUserId = userId,
             };
 
-            /// wwwroot / images / recipes / jhdsi - 343g3h453 -= g34g.jpg
+            /// wwwroot / images / movies / jhdsi - 343g3h453 -= g34g.jpg
             Directory.CreateDirectory($"{imagePath}/movies/");
             foreach (var image in inputMovie.Images)
             {
@@ -67,14 +67,29 @@ namespace Adaptations.Services.Data
             return this.movieRepository.All().Count();
         }
 
-        public Task DeleteByIdAsync(int id)
+        public async Task DeleteByIdAsync(int? id)
         {
-            throw new System.NotImplementedException();
+            var movie = this.movieRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
+
+            this.movieRepository.Delete(movie);
+
+            await this.movieRepository.SaveChangesAsync();
         }
 
-        public Task EditAsync(MovieViewModel model)
+        public async Task EditAsync(int? id, EditMovieInputModel model)
         {
-            throw new System.NotImplementedException();
+            var movie = this.movieRepository.All().FirstOrDefault(x => x.Id == id);
+            movie.MovieName = model.MovieName;
+            movie.MoviePlot = model.MoviePlot;
+            movie.DirectorName = model.DirectorName;
+            movie.RunTime = model.RunTime;
+            movie.ReleaseYear = model.ReleaseYear;
+            movie.Rating = model.Rating;
+            movie.Genre = model.Genre;
+
+            await this.movieRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllMoviesAsync<T>(int page, int itemsPerPage = 9)
@@ -88,24 +103,45 @@ namespace Adaptations.Services.Data
             return movies;
         }
 
-        public Task<IEnumerable<MovieViewModel>> GetAllMoviesByActor()
+        public async Task<IEnumerable<T>> GetAllActorsByMovieId<T>(int id)
         {
-            throw new System.NotImplementedException();
+            var movies = await this.movieRepository
+                 .All()
+                 .Where(x => x.ActorsMovies.Any(am => am.ActorId == id))
+                 .To<T>()
+                 .ToListAsync();
+
+            return movies;
         }
 
-        public Task<IEnumerable<MovieViewModel>> GetAllMoviesByBook()
+        public async Task<IEnumerable<T>> GetAllBooksByMovieId<T>(int id)
         {
-            throw new System.NotImplementedException();
+            var movies = await this.movieRepository
+                 .All()
+                 .Where(x => x.Book.Id == id)
+                 .To<T>()
+                 .ToListAsync();
+
+            return movies;
         }
 
-        public Task<MovieViewModel> GetMovieByIdAsync(int id)
+        public T GetMovieById<T>(int id)
         {
-            throw new System.NotImplementedException();
+            var movie = this.movieRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+
+            return movie;
         }
 
-        public Task<IEnumerable<MovieViewModel>> GetMoviesBySearchResult(string searchResult, int? movieId)
+        public async Task<IEnumerable<T>> GetMoviesBySearchResult<T>(string searchResult)
         {
-            throw new System.NotImplementedException();
+            searchResult = searchResult ?? string.Empty;
+
+            var model = await this.movieRepository.All()
+                .Where(m => m.MovieName.ToLower().Contains(searchResult.ToLower()))
+                .To<T>()
+                .ToListAsync();
+
+            return model;
         }
 
 

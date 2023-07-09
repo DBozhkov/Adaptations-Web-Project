@@ -12,9 +12,8 @@ namespace Adaptations.Data.Models
         public Book()
         {
             this.Characters = new HashSet<Character>();
+            this.Images = new HashSet<Image>();
         }
-
-        public int Id { get; set; }
 
         public string Title { get; set; }
 
@@ -22,8 +21,6 @@ namespace Adaptations.Data.Models
 
         public string Description { get; set; }
 
-        [ForeignKey(nameof(Movie))]
-        public int MovieId { get; set; }
         public virtual Movie Movie { get; set; }
 
         public BookGenre Genre { get; set; }
@@ -33,10 +30,15 @@ namespace Adaptations.Data.Models
         public virtual ICollection<Character> Characters { get; set; }
 
         public bool HasMovie { get; set; }
-        
+
+        public virtual ICollection<Image> Images { get; set; }
+
         [ForeignKey(nameof(Author))]
         public int AuthorId { get; set; }
         public virtual Author Author { get; set; }
+
+        public string AddedByUserId { get; set; }
+        public virtual ApplicationUser AddedByUser { get; set; }
 
         public virtual ApplicationUser User { get; set; }
     }

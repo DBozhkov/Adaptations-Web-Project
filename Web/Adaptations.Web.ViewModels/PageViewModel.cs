@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Adaptations.Web.ViewModels
+﻿namespace Adaptations.Web.ViewModels
 {
+    using System;
+
     public class PageViewModel
     {
         public int PageNumber { get; set; }
@@ -16,9 +14,9 @@ namespace Adaptations.Web.ViewModels
 
         public int NextPageNumber => this.PageNumber + 1;
 
-        public int PagesCount => (int)Math.Ceiling((double)this.MoviesCount / this.ItemsPerPage);
+        public int PagesCount => (int)Math.Ceiling((double)this.Count / this.ItemsPerPage);
 
-        public int MoviesCount { get; set; }
+        public int Count { get; set; }
 
         public int ItemsPerPage { get; set; }
     }

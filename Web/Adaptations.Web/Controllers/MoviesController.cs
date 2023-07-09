@@ -4,9 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Adaptations.Common;
     using Adaptations.Data.Models;
     using Adaptations.Services.Data;
     using Adaptations.Web.ViewModels.Movies;
+    using Adaptations.Web.ViewModels.Movies.SearchMovie;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -44,7 +47,7 @@
             {
                 ItemsPerPage = ItemsPerPage,
                 PageNumber = id,
-                MoviesCount = this.moviesService.GetCount(),
+                Count = this.moviesService.GetCount(),
                 Movies = movies,
             };
             return this.View(movielist);
@@ -71,13 +74,60 @@
             }
             catch (Exception ex)
             {
-                this.ModelState.AddModelError(string.Empty, ex.Message);
+                this.ModelState.AddModelError(string.Empty, $"Error: {ex.InnerException?.Message ?? ex.Message}");
                 return this.View(model);
             }
 
             this.TempData["Message"] = "Movie added successfully.";
 
             return this.RedirectToAction("All");
+        }
+
+        public IActionResult MovieId(int id)
+        {
+            var movie = this.moviesService.GetMovieById<SingleMovieViewModel>(id);
+
+            return this.View(movie);
+        }
+
+        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.moviesService.GetMovieById<EditMovieInputModel>(id);
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Edit(int id, EditMovieInputModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            await this.moviesService.EditAsync(id, model);
+            return this.RedirectToAction(nameof(this.MovieId), new { id });
+        }
+
+        public async Task<IActionResult> Search(string searchResult)
+        {
+            var viewModel = new ListMoviesViewModel
+            {
+                SearchText = searchResult,
+            };
+
+            var movies = await this.moviesService.GetMoviesBySearchResult<SingleMovieViewModel>(searchResult);
+
+            if (movies == null)
+            {
+                return this.RedirectToAction(nameof(this.All), "Movies");
+            }
+
+            viewModel.Movies = movies;
+
+            return this.View(viewModel);
         }
     }
 }

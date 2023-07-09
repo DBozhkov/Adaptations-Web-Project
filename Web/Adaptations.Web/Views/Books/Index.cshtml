@@ -1,9 +1,11 @@
-﻿@model Adaptations.Web.ViewModels.IndexViewModel
-
-@{
+﻿@{
     this.ViewData["Title"] = "Books";
 }
 
 <h1>Mitko's Books!</h1>
 
-<div>@Model.BooksCount</div>
+<ul>
+    <li><a asp-controller="Books" asp-action="Add">Add a book</a></li>
+    <li><a asp-controller="Books" asp-action="All">All books!</a></li>
+    <!-- Add more menu items as needed -->
+</ul>

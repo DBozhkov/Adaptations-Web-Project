@@ -11,16 +11,12 @@ namespace Adaptations.Data.Models
 
         public string CharacterName { get; set; }
 
-        [ForeignKey(nameof(Actor))]
-        public int ActorId { get; set; }
+        public string CharacterDescription { get; set; }
+
         public virtual Actor Actor { get; set; }
 
-        [ForeignKey(nameof(Book))]
-        public int BookId { get; set; }
         public virtual Book Book { get; set; }
 
-        [ForeignKey(nameof(Movie))]
-        public int MovieId { get; set; }
         public virtual Movie Movie { get; set; }
     }
 }

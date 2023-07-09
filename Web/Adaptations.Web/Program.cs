@@ -1,7 +1,9 @@
 ﻿namespace Adaptations.Web
 {
+    using Adaptations.Data;
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.EntityFrameworkCore;
 
     public static class Program
     {

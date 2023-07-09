@@ -31,6 +31,7 @@
             ConfigureServices(serviceCollection);
             IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider(true);
 
+
             // Seed data on application startup
             using (var serviceScope = serviceProvider.CreateScope())
             {
@@ -92,6 +93,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISmsSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IMoviesService, MoviesService>();
         }
     }
 }

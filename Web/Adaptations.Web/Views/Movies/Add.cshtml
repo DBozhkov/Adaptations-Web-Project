@@ -1,6 +1,10 @@
 ﻿@using Adaptations.Data.Models.Enums
 @model Adaptations.Web.ViewModels.Movies.CreateMovieInputModel
 
+@{
+    this.ViewData["Title"] = "Add movie";
+}
+
 <h1>Add a new Movie!</h1>
 
 <form method="post" class="col-md-6 offset-md-3"
@@ -14,9 +18,9 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="ReleaseYear">Movie release year:</label>
-        <input asp-for="ReleaseYear" class="form-control" />
-        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+        <label asp-for="DirectorName">Please enter the director's name:</label>
+        <input asp-for="DirectorName" class="form-control" />
+        <span asp-validation-for="DirectorName" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -26,9 +30,21 @@
     </div>
 
     <div class="form-group">
+        <label asp-for="RunTime">Moive Runtime:</label>
+        <input asp-for="RunTime" class="form-control" />
+        <span asp-validation-for="RunTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
         <label asp-for="Genre">Please enter a movie genre:</label>
         <select asp-for="Genre" class="form-control" asp-items="@Html.GetEnumSelectList<MovieGenre>()"></select>
         <span asp-validation-for="Genre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReleaseYear">Movie release year:</label>
+        <input asp-for="ReleaseYear" class="form-control" />
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
     </div>
 
     <div class="form-group">

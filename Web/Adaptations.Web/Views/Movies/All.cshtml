@@ -19,7 +19,7 @@
         <div class="media col-md-4">
             <img src="@movie.ImageUrl" width="100" class="mr-3 img-responsive" alt="img">
             <div class="media-body">
-                <h5 class="mt-0"><a asp-action="ById" asp-route-id="@movie.MovieId">@movie.MovieName</a></h5>
+                <h5 class="mt-0"><a asp-action="MovieId" asp-route-id="@(movie.Id)">@movie.MovieName</a></h5>
                 <div>@movie.ReleaseYear</div>
                 <div>@movie.MoviePlot</div>
                 <div>@movie.Rating</div>

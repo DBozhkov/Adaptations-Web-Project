@@ -1,17 +1,15 @@
-﻿using Adaptations.Data.Models;
-using Adaptations.Data.Models.Enums;
-using Adaptations.Services.Mapping;
-using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Adaptations.Web.ViewModels.Movies
+﻿namespace Adaptations.Web.ViewModels.Movies
 {
+    using System.Linq;
+
+    using Adaptations.Data.Models;
+    using Adaptations.Data.Models.Enums;
+    using Adaptations.Services.Mapping;
+    using AutoMapper;
+
     public class AllMoviesViewModel : IMapFrom<Movie>, IHaveCustomMappings
     {
-        public int MovieId { get; set; }
+        public int Id { get; set; }
 
         public string ImageUrl { get; set; }
 

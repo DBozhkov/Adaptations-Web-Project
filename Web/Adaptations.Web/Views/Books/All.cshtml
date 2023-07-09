@@ -1,0 +1,33 @@
+﻿@model Adaptations.Web.ViewModels.Books.ListAllBooks
+
+@{
+    this.ViewData["Title"] = "All Books, page " + Model.PageNumber;
+}
+
+
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
+
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+<div class="row">
+    @foreach (var book in this.Model.Books)
+    {
+        <div class="media col-md-4">
+            <img src="@book.ImageUrl" width="100" class="mr-3 img-responsive" alt="img">
+            <div class="media-body">
+                <h5 class="mt-0"><a asp-action="BookId" asp-route-id="@(book.Id)">@book.Title</a></h5>
+                <div>@book.Description</div>
+                <div>@book.ReleaseYear</div>
+                <div>@book.AuthorName</div>
+                <div>@book.Genre</div>
+            </div>
+        </div>
+    }
+</div>
+<hr />
+
+<partial name="_PagingPartial" model="@Model" />

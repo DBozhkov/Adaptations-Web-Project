@@ -39,7 +39,8 @@ namespace Adaptations.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CharacterId");
+                    b.HasIndex("CharacterId")
+                        .IsUnique();
 
                     b.HasIndex("ImageId");
 
@@ -160,7 +161,7 @@ namespace Adaptations.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Genre");
+                    b.Property<string>("Biography");
 
                     b.Property<string>("Name");
 
@@ -174,6 +175,8 @@ namespace Adaptations.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddedByUserId");
 
                     b.Property<int>("AuthorId");
 
@@ -193,8 +196,6 @@ namespace Adaptations.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<int>("MovieId");
-
                     b.Property<int>("ReleaseYear");
 
                     b.Property<string>("Title");
@@ -203,11 +204,11 @@ namespace Adaptations.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddedByUserId");
+
                     b.HasIndex("AuthorId");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("MovieId");
 
                     b.HasIndex("UserId");
 
@@ -220,17 +221,15 @@ namespace Adaptations.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ActorId");
+                    b.Property<int?>("BookId");
 
-                    b.Property<int>("BookId");
+                    b.Property<string>("CharacterDescription");
 
                     b.Property<string>("CharacterName");
 
-                    b.Property<int>("MovieId");
+                    b.Property<int?>("MovieId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActorId");
 
                     b.HasIndex("BookId");
 
@@ -246,13 +245,13 @@ namespace Adaptations.Data.Migrations
 
                     b.Property<string>("AddedByUserId");
 
+                    b.Property<int?>("BookId");
+
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<string>("Extension");
 
                     b.Property<byte[]>("ImageData");
-
-                    b.Property<string>("ImageId");
 
                     b.Property<DateTime?>("ModifiedOn");
 
@@ -263,6 +262,8 @@ namespace Adaptations.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddedByUserId");
+
+                    b.HasIndex("BookId");
 
                     b.HasIndex("MovieId");
 
@@ -277,17 +278,19 @@ namespace Adaptations.Data.Migrations
 
                     b.Property<string>("AddedByUserId");
 
+                    b.Property<int?>("BookId");
+
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<string>("DirectorName");
 
                     b.Property<int>("Genre");
 
                     b.Property<bool>("IsDeleted");
 
                     b.Property<DateTime?>("ModifiedOn");
-
-                    b.Property<int>("MovieId");
 
                     b.Property<string>("MovieName");
 
@@ -297,11 +300,17 @@ namespace Adaptations.Data.Migrations
 
                     b.Property<int>("ReleaseYear");
 
+                    b.Property<int>("RunTime");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddedByUserId");
+
+                    b.HasIndex("BookId")
+                        .IsUnique()
+                        .HasFilter("[BookId] IS NOT NULL");
 
                     b.HasIndex("IsDeleted");
 
@@ -424,8 +433,8 @@ namespace Adaptations.Data.Migrations
             modelBuilder.Entity("Adaptations.Data.Models.Actor", b =>
                 {
                     b.HasOne("Adaptations.Data.Models.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterId")
+                        .WithOne("Actor")
+                        .HasForeignKey("Adaptations.Data.Models.Actor", "CharacterId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Adaptations.Data.Models.Image", "Image")
@@ -448,14 +457,13 @@ namespace Adaptations.Data.Migrations
 
             modelBuilder.Entity("Adaptations.Data.Models.Book", b =>
                 {
+                    b.HasOne("Adaptations.Data.Models.ApplicationUser", "AddedByUser")
+                        .WithMany()
+                        .HasForeignKey("AddedByUserId");
+
                     b.HasOne("Adaptations.Data.Models.Author", "Author")
                         .WithMany("Books")
                         .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Adaptations.Data.Models.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Adaptations.Data.Models.ApplicationUser", "User")
@@ -465,20 +473,13 @@ namespace Adaptations.Data.Migrations
 
             modelBuilder.Entity("Adaptations.Data.Models.Character", b =>
                 {
-                    b.HasOne("Adaptations.Data.Models.Actor", "Actor")
-                        .WithMany()
-                        .HasForeignKey("ActorId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("Adaptations.Data.Models.Book", "Book")
                         .WithMany("Characters")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("BookId");
 
                     b.HasOne("Adaptations.Data.Models.Movie", "Movie")
                         .WithMany()
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("MovieId");
                 });
 
             modelBuilder.Entity("Adaptations.Data.Models.Image", b =>
@@ -486,6 +487,10 @@ namespace Adaptations.Data.Migrations
                     b.HasOne("Adaptations.Data.Models.ApplicationUser", "AddedByUser")
                         .WithMany()
                         .HasForeignKey("AddedByUserId");
+
+                    b.HasOne("Adaptations.Data.Models.Book")
+                        .WithMany("Images")
+                        .HasForeignKey("BookId");
 
                     b.HasOne("Adaptations.Data.Models.Movie")
                         .WithMany("Images")
@@ -497,6 +502,10 @@ namespace Adaptations.Data.Migrations
                     b.HasOne("Adaptations.Data.Models.ApplicationUser", "AddedByUser")
                         .WithMany()
                         .HasForeignKey("AddedByUserId");
+
+                    b.HasOne("Adaptations.Data.Models.Book", "Book")
+                        .WithOne("Movie")
+                        .HasForeignKey("Adaptations.Data.Models.Movie", "BookId");
 
                     b.HasOne("Adaptations.Data.Models.ApplicationUser", "User")
                         .WithMany()

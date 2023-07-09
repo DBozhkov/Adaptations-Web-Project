@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Adaptations.Data.Migrations
 {
-    public partial class InitialCreateAdaptations : Migration
+    public partial class InitialCreateAdaptationsDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -194,34 +194,6 @@ namespace Adaptations.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Movies",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    MovieId = table.Column<int>(nullable: false),
-                    MovieName = table.Column<string>(nullable: true),
-                    ReleaseYear = table.Column<int>(nullable: false),
-                    Rating = table.Column<double>(nullable: false),
-                    Genre = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Movies", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Movies_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
                 {
@@ -234,7 +206,6 @@ namespace Adaptations.Data.Migrations
                     Title = table.Column<string>(nullable: true),
                     ReleaseYear = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    MovieId = table.Column<int>(nullable: false),
                     Genre = table.Column<int>(nullable: false),
                     BooksSold = table.Column<int>(nullable: false),
                     HasMovie = table.Column<bool>(nullable: false),
@@ -251,15 +222,83 @@ namespace Adaptations.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Books_Movies_MovieId",
-                        column: x => x.MovieId,
-                        principalTable: "Movies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Books_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Movies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    MovieName = table.Column<string>(nullable: true),
+                    ReleaseYear = table.Column<int>(nullable: false),
+                    MoviePlot = table.Column<string>(nullable: true),
+                    Rating = table.Column<double>(nullable: false),
+                    Genre = table.Column<int>(nullable: false),
+                    DirectorName = table.Column<string>(nullable: true),
+                    RunTime = table.Column<int>(nullable: false),
+                    BookId = table.Column<int>(nullable: true),
+                    AddedByUserId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Movies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Movies_AspNetUsers_AddedByUserId",
+                        column: x => x.AddedByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Movies_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Movies_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    ImageData = table.Column<byte[]>(nullable: true),
+                    Extension = table.Column<string>(nullable: true),
+                    RemoteImageUrl = table.Column<string>(nullable: true),
+                    AddedByUserId = table.Column<string>(nullable: true),
+                    MovieId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_AspNetUsers_AddedByUserId",
+                        column: x => x.AddedByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Images_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -304,37 +343,6 @@ namespace Adaptations.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Characters_Movies_MovieId",
-                        column: x => x.MovieId,
-                        principalTable: "Movies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Images",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    ImageId = table.Column<string>(nullable: true),
-                    ImageData = table.Column<byte[]>(nullable: true),
-                    Extension = table.Column<string>(nullable: true),
-                    ActorId = table.Column<int>(nullable: false),
-                    MovieId = table.Column<int>(nullable: false),
-                    BookId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Images", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Images_Books_BookId",
-                        column: x => x.BookId,
-                        principalTable: "Books",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Images_Movies_MovieId",
                         column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
@@ -446,11 +454,6 @@ namespace Adaptations.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_MovieId",
-                table: "Books",
-                column: "MovieId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Books_UserId",
                 table: "Books",
                 column: "UserId");
@@ -471,19 +474,26 @@ namespace Adaptations.Data.Migrations
                 column: "MovieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_ActorId",
+                name: "IX_Images_AddedByUserId",
                 table: "Images",
-                column: "ActorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Images_BookId",
-                table: "Images",
-                column: "BookId");
+                column: "AddedByUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Images_MovieId",
                 table: "Images",
                 column: "MovieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movies_AddedByUserId",
+                table: "Movies",
+                column: "AddedByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movies_BookId",
+                table: "Movies",
+                column: "BookId",
+                unique: true,
+                filter: "[BookId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movies_IsDeleted",
@@ -515,24 +525,12 @@ namespace Adaptations.Data.Migrations
                 principalTable: "Actors",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Images_Actors_ActorId",
-                table: "Images",
-                column: "ActorId",
-                principalTable: "Actors",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Actors_Characters_CharacterId",
-                table: "Actors");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Actors_Images_ImageId",
                 table: "Actors");
 
             migrationBuilder.DropTable(
@@ -563,19 +561,19 @@ namespace Adaptations.Data.Migrations
                 name: "Characters");
 
             migrationBuilder.DropTable(
+                name: "Actors");
+
+            migrationBuilder.DropTable(
                 name: "Images");
 
             migrationBuilder.DropTable(
-                name: "Actors");
+                name: "Movies");
 
             migrationBuilder.DropTable(
                 name: "Books");
 
             migrationBuilder.DropTable(
                 name: "Authors");
-
-            migrationBuilder.DropTable(
-                name: "Movies");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -1,0 +1,62 @@
+﻿@using Adaptations.Data.Models.Enums
+@model Adaptations.Web.ViewModels.Movies.EditMovieInputModel
+
+@{
+    this.ViewData["Title"] = "Edit movie";
+}
+
+
+<form method="post" id="editForm">
+    <h1>@this.ViewData["Title"]</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="MovieName">Please enter a movie name:</label>
+        <input asp-for="MovieName" class="form-control" />
+        <span asp-validation-for="MovieName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DirectorName">Please enter the director's name:</label>
+        <input asp-for="DirectorName" class="form-control" />
+        <span asp-validation-for="DirectorName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MoviePlot">Please enter a movie plot:</label>
+        <textarea asp-for="MoviePlot" class="form-control"></textarea>
+        <span asp-validation-for="MoviePlot" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RunTime">Movie Runtime:</label>
+        <input asp-for="RunTime" class="form-control" />
+        <span asp-validation-for="RunTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Genre">Please enter a movie genre:</label>
+        <select asp-for="Genre" class="form-control" asp-items="@Html.GetEnumSelectList<MovieGenre>()"></select>
+        <span asp-validation-for="Genre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReleaseYear">Movie release year:</label>
+        <input asp-for="ReleaseYear" class="form-control" />
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Rating">Movie rating:</label>
+        <input asp-for="Rating" class="form-control" />
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <hr />
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-primary">Edit Movie</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

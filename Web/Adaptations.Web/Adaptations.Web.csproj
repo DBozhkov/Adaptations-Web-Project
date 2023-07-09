@@ -26,7 +26,14 @@
 
 
   <ItemGroup>
+    <Folder Include="wwwroot\images\movies\" />
     <Folder Include="wwwroot\lib\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\js\min\app-min.js" />
+    <None Include="wwwroot\js\min\plugins-min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,19 +63,10 @@
     <Content Update="wwwroot\css\DropDownMenu.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\css\plugins.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\css\site.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\css\site.min.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\css\style.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\images\movies\61458d41-f2a3-4b96-8bc0-73f921e1d0e6.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\js\custom.js">
