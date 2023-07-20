@@ -42,7 +42,6 @@
 
             var movies = await this.moviesService.GetAllMoviesAsync<AllMoviesViewModel>(id, ItemsPerPage);
 
-
             var movielist = new ListAllMovies
             {
                 ItemsPerPage = ItemsPerPage,
@@ -111,23 +110,5 @@
             return this.RedirectToAction(nameof(this.MovieId), new { id });
         }
 
-        public async Task<IActionResult> Search(string searchResult)
-        {
-            var viewModel = new ListMoviesViewModel
-            {
-                SearchText = searchResult,
-            };
-
-            var movies = await this.moviesService.GetMoviesBySearchResult<SingleMovieViewModel>(searchResult);
-
-            if (movies == null)
-            {
-                return this.RedirectToAction(nameof(this.All), "Movies");
-            }
-
-            viewModel.Movies = movies;
-
-            return this.View(viewModel);
-        }
     }
 }

@@ -1,17 +1,17 @@
-﻿using Adaptations.Data.Common.Models;
-using Adaptations.Data.Common.Repositories;
-using Adaptations.Data.Models;
-using Adaptations.Services.Mapping;
-using Adaptations.Web.ViewModels.Movies;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Adaptations.Services.Data
+﻿namespace Adaptations.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Adaptations.Data.Common.Repositories;
+    using Adaptations.Data.Models;
+    using Adaptations.Services.Mapping;
+    using Adaptations.Web.ViewModels.Movies;
+    using Microsoft.EntityFrameworkCore;
+
     public class MoviesService : IMoviesService
     {
         private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
@@ -132,16 +132,23 @@ namespace Adaptations.Services.Data
             return movie;
         }
 
-        public async Task<IEnumerable<T>> GetMoviesBySearchResult<T>(string searchResult)
+        public async Task<IEnumerable<T>> GetMoviesBySearchResult<T>(string searchResult, int page, int itemsPerPage = 9)
         {
             searchResult = searchResult ?? string.Empty;
 
-            var model = await this.movieRepository.All()
+            var models = await this.movieRepository.All()
                 .Where(m => m.MovieName.ToLower().Contains(searchResult.ToLower()))
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .To<T>()
-                .ToListAsync();
+                .ToArrayAsync();
 
-            return model;
+            return models;
+        }
+
+        public bool IsSearchResultMovie(string input)
+        {
+            return this.movieRepository.All().Any(x => x.MovieName.ToLower().Contains(input.ToLower()));
         }
 
 

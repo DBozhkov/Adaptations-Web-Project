@@ -122,9 +122,23 @@
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<MovieViewModel>> GetBooksBySearchResult(string searchResult, int? movieId)
+        public async Task<IEnumerable<T>> GetBooksBySearchResult<T>(string searchResult, int page, int itemsPerPage = 9)
         {
-            throw new NotImplementedException();
+            searchResult = searchResult ?? string.Empty;
+
+            var models = await this.booksRepository.All()
+                .Where(b => b.Title.ToLower().Contains(searchResult.ToLower()))
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .To<T>()
+                .ToArrayAsync();
+
+            return models;
+        }
+
+        public bool IsSearchResultBook(string input)
+        {
+            return this.booksRepository.All().Any(x => x.Title.ToLower().Contains(input.ToLower()));
         }
 
         public int GetCount()

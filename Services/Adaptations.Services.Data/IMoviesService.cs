@@ -11,10 +11,11 @@ namespace Adaptations.Services.Data
         Task<IEnumerable<T>> GetAllMoviesAsync<T>(int page, int itemsPerPage = 9);
         int GetCount();
         Task<IEnumerable<T>> GetRandom<T>(int count);
-        Task<IEnumerable<T>> GetMoviesBySearchResult<T>(string searchResult);
+        Task<IEnumerable<T>> GetMoviesBySearchResult<T>(string searchResult, int page, int itemsPerPage = 9);
         Task DeleteByIdAsync(int? id);
         Task EditAsync(int? id, EditMovieInputModel model);
         Task<IEnumerable<T>> GetAllBooksByMovieId<T>(int id);
         Task<IEnumerable<T>> GetAllActorsByMovieId<T>(int id);
+        bool IsSearchResultMovie(string input);
     }
 }
