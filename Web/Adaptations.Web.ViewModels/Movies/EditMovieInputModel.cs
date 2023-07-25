@@ -1,13 +1,11 @@
 ﻿namespace Adaptations.Web.ViewModels.Movies
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Adaptations.Data.Models;
     using Adaptations.Data.Models.Enums;
     using Adaptations.Services.Mapping;
     using AutoMapper;
-    using Microsoft.AspNetCore.Http;
 
     public class EditMovieInputModel : IMapFrom<Movie>
     {

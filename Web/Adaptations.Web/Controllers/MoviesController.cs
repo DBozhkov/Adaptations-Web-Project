@@ -16,6 +16,7 @@
 
     public class MoviesController : BaseController
     {
+        private const int ItemsPerPage = 9;
         private readonly IMoviesService moviesService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IHostingEnvironment environment;
@@ -37,8 +38,6 @@
             {
                 return this.NotFound();
             }
-
-            const int ItemsPerPage = 9;
 
             var movies = await this.moviesService.GetAllMoviesAsync<AllMoviesViewModel>(id, ItemsPerPage);
 
@@ -64,7 +63,7 @@
             {
                 return this.View(model);
             }
-            
+
             var user = await this.userManager.GetUserAsync(this.User);
 
             try
@@ -89,26 +88,65 @@
             return this.View(movie);
         }
 
-        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public IActionResult Edit(int id)
-        {
-            var inputModel = this.moviesService.GetMovieById<EditMovieInputModel>(id);
-
-            return this.View(inputModel);
-        }
-
-        [HttpPost]
-        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> Edit(int id, EditMovieInputModel model)
+        public async Task<IActionResult> OrderByName(int id = 1)
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View(model);
+                return this.RedirectToAction("All");
             }
 
-            await this.moviesService.EditAsync(id, model);
-            return this.RedirectToAction(nameof(this.MovieId), new { id });
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var orderedMovies = await this.moviesService.SortByNameAsync<AllMoviesViewModel>(id, ItemsPerPage);
+
+            var orderedList = new ListAllMovies
+            {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = id,
+                Count = this.moviesService.GetCount(),
+                Movies = orderedMovies,
+            };
+
+            return this.RedirectToAction("OrderedMovies", orderedList);
         }
 
+        public async Task<IActionResult> OrderByDate(int id = 1)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("All");
+            }
+
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var orderedMovies = await this.moviesService.SortByAddedAsync<AllMoviesViewModel>(id, ItemsPerPage);
+
+            var orderedList = new ListAllMovies
+            {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = id,
+                Count = this.moviesService.GetCount(),
+                Movies = orderedMovies,
+            };
+
+            return this.RedirectToAction("OrderedMovies", orderedList);
+        }
+
+        public IActionResult OrderedMovies(ListAllMovies model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("All");
+            }
+
+            var viewModel = model;
+            return this.View(viewModel);
+        }
     }
 }

@@ -52,7 +52,7 @@
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddUserStore<ApplicationUserStore>()
-                .AddRoleStore<ApplicationRoleStore>()
+                .AddRoles<ApplicationRole>()
                 .AddDefaultTokenProviders();
 
             services
@@ -83,6 +83,7 @@
                 });
 
             services.AddSingleton(this.configuration);
+            services.AddAuthorization();
 
             // Identity stores
             services.AddTransient<IUserStore<ApplicationUser>, ApplicationUserStore>();
@@ -110,13 +111,8 @@
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-                if (env.IsDevelopment())
-                {
-                    dbContext.Database.Migrate();
-                }
-
-                ApplicationDbContextSeeder.Seed(dbContext, serviceScope.ServiceProvider);
+                dbContext.Database.Migrate();
+                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
             if (env.IsDevelopment())
@@ -137,6 +133,7 @@
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(name: "areaRoute", template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
             });
         }

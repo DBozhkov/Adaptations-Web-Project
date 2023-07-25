@@ -46,7 +46,7 @@
 
         public async Task<IActionResult> SearchByMovieName(string input, int id)
         {
-            var movies = await this.moviesService.GetMoviesBySearchResult<AllMoviesViewModel>(input, id, ItemsPerPage);
+            var movies = await this.moviesService.GetMoviesBySearchResultAsync<AllMoviesViewModel>(input, id, ItemsPerPage);
 
             var searchMovieList = new ListAllMovies
             {
@@ -60,7 +60,7 @@
 
         public async Task<IActionResult> SearchByBookTitle(string input, int id)
         {
-            var books = await this.moviesService.GetMoviesBySearchResult<AllBooksViewModel>(input, id, ItemsPerPage);
+            var books = await this.moviesService.GetMoviesBySearchResultAsync<AllBooksViewModel>(input, id, ItemsPerPage);
 
             var searchBooksList = new ListAllBooks
             {

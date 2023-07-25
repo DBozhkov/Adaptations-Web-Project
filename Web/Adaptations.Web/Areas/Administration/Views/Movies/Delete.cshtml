@@ -1,0 +1,68 @@
+﻿@using Adaptations.Data.Models.Enums
+@model Adaptations.Web.ViewModels.Movies.DeleteMovieViewModel
+
+@{
+    this.ViewData["Title"] = "Delete Movie";
+}
+
+<div class="row justify-content-center">
+    <form asp-area="Administration" asp-controller="Movies" asp-action="Delete" enctype="multipart/form-data" method="post" class="text-center col-md-6">
+        <fieldset disabled="">
+            <h4>Delete movie</h4>
+            <hr />
+            <div class="form-group">
+
+                <label asp-for="MovieName"></label>
+                <input asp-for="MovieName" class="form-control" placeholder="@Model.MovieName" />
+                <span asp-validation-for="MovieName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DirectorName"></label>
+                <input asp-for="DirectorName" class="form-control" placeholder="@Model.DirectorName" />
+                <span asp-validation-for="DirectorName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MoviePlot"></label>
+                <textarea asp-for="MoviePlot" class="form-control" placeholder="@Model.MoviePlot"></textarea>
+                <span asp-validation-for="MoviePlot" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RunTime"></label>
+                <input asp-for="RunTime" class="form-control" placeholder="@Model.RunTime" />
+                <span asp-validation-for="RunTime" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Genre"></label>
+                <select asp-for="Genre" class="form-control" asp-items="@Html.GetEnumSelectList<MovieGenre>()"></select>
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ReleaseYear"></label>
+                <input asp-for="ReleaseYear" class="form-control" placeholder="@Model.ReleaseYear"/>
+                <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Rating"></label>
+                <input asp-for="Rating" class="form-control" placeholder="@Model.Rating"/>
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Images"></label>
+                <input asp-for="Images" class="form-control" placeholder="@Model.Images"/>
+                <span asp-validation-for="Images" class="text-danger"></span>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-outline-warning">Delete Movie</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

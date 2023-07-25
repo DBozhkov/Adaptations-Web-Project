@@ -150,5 +150,31 @@
         {
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<T>> SortByTitleAsync<T>(int page, int itemsPerPage = 9)
+        {
+            var books = await this.booksRepository
+                    .All()
+                    .OrderBy(m => m.Title)
+                    .Skip((page - 1) * itemsPerPage)
+                    .Take(itemsPerPage)
+                    .To<T>()
+                    .ToArrayAsync();
+
+            return books;
+        }
+
+        public async Task<IEnumerable<T>> SortByAddedAsync<T>(int page, int itemsPerPage = 9)
+        {
+            var books = await this.booksRepository
+                    .All()
+                    .OrderBy(m => m.CreatedOn)
+                    .Skip((page - 1) * itemsPerPage)
+                    .Take(itemsPerPage)
+                    .To<T>()
+                    .ToArrayAsync();
+
+            return books;
+        }
     }
 }

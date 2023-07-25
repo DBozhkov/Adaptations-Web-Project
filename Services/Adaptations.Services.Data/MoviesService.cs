@@ -132,7 +132,7 @@
             return movie;
         }
 
-        public async Task<IEnumerable<T>> GetMoviesBySearchResult<T>(string searchResult, int page, int itemsPerPage = 9)
+        public async Task<IEnumerable<T>> GetMoviesBySearchResultAsync<T>(string searchResult, int page, int itemsPerPage = 9)
         {
             searchResult = searchResult ?? string.Empty;
 
@@ -155,6 +155,32 @@
         Task<IEnumerable<T>> IMoviesService.GetRandom<T>(int count)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<T>> SortByNameAsync<T>(int page, int itemsPerPage = 9)
+        {
+            var movies = await this.movieRepository
+                         .All()
+                         .OrderBy(m => m.MovieName)
+                         .Skip((page - 1) * itemsPerPage)
+                         .Take(itemsPerPage)
+                         .To<T>()
+                         .ToArrayAsync();
+
+            return movies;
+        }
+
+        public async Task<IEnumerable<T>> SortByAddedAsync<T>(int page, int itemsPerPage = 9)
+        {
+            var movies = await this.movieRepository
+             .All()
+             .OrderBy(m => m.CreatedOn)
+             .Skip((page - 1) * itemsPerPage)
+             .Take(itemsPerPage)
+             .To<T>()
+             .ToArrayAsync();
+
+            return movies;
         }
     }
 }

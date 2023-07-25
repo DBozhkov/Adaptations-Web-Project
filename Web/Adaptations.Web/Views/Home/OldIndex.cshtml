@@ -1,0 +1,14 @@
+﻿@{
+    this.ViewData["Title"] = "Home Page";
+}
+
+Welcome to Mitko's Adaptations Website!
+
+<form class="form-group ml-md-3" asp-controller="Search" asp-action="GetResult" method="get">
+    <h3 class="mt-0 mb-5 text-white pr-3">Search</h3>
+
+    <input class="form-control mr-3 w-100 pr-3" name="searchInput" type="text" placeholder="Enter Movie or Book Name"
+           aria-label="Search">
+
+    <input type="submit" class="btn btn-lg btn-block btn-primary mt-5 pr-3" value="Search" />
+</form>
