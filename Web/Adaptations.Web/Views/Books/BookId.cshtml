@@ -1,0 +1,53 @@
+﻿@model Adaptations.Web.ViewModels.Movies.SingleMovieViewModel
+﻿@using Adaptations.Common
+
+@{
+    this.ViewData["Title"] = this.Model.MovieName;
+}
+
+<div class="page">
+    <div class="breadcrumbs">
+        <a href="index.html">Home</a>
+        <a href="review.html">Movie Review</a>
+        <div class="breadcrumbs">
+            <span>@Model.MovieName</span>
+        </div>
+
+        <div class="content">
+            <div class="row">
+                <div class="col-md-6">
+                    <figure class="movie-poster"><img src=@Model.ImageUrl alt="#"></figure>
+                </div>
+                <div class="col-md-6">
+                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                    {
+                        <a class="btn btn-outline-primary" asp-area="Administration" asp-controller="Books" asp-action="Edit" asp-route-id="@Model.Id">Edit Movie</a>
+                        <a class="btn btn-outline-warning" asp-area="Administration" asp-controller="Books" asp-action="Delete" asp-route-id="@Model.Id">Delete Movie</a>
+                    }
+                    <h2 class="movie-title">@Model.MovieName</h2>
+                    <div class="movie-summary">
+                        <p>@Model.MoviePlot</p>
+
+                    </div>
+                    <ul class="movie-meta">
+                        <li>
+                            <strong>Rating:</strong>
+                            <div class="star-rating" title="Rated 4.00 out of 5"><span style="width:80%"><strong class="rating">@Model.Rating</strong> out of 10</span></div>
+                        </li>
+                        <li><strong>Length:</strong> @Model.RunTime</li>
+                        <li><strong>Release Year:</strong> @Model.ReleaseYear</li>
+                        <li><strong>Category:</strong> @Model.Genre</li>
+                    </ul>
+
+                    <ul class="starring">
+                        <li><strong>Director:</strong> @Model.DirectorName</li>
+                        <li><strong>Stars:</strong> @Model.Actors</li>
+                    </ul>
+                </div>
+            </div> <!-- .row -->
+            <div class="entry-content">
+                <p> @Model.MoviePlot</p>
+            </div>
+        </div>
+    </div>
+</div>

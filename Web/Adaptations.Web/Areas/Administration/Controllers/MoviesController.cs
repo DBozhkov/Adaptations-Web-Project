@@ -35,11 +35,10 @@
             return this.RedirectToAction("MovieId", "Movies", new { area = string.Empty, id });
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            return this.View();
-            //await this.moviesService.GetMovieById<DeleteMovieViewModel>(id);
-            //return this.View(movieToDelete);
+            var movie = this.moviesService.GetMovieById<DeleteMovieViewModel>(id);
+            return this.View(movie);
         }
 
         [HttpPost]
@@ -47,7 +46,7 @@
         {
             var id = deleteMovie.Id;
             await this.moviesService.DeleteByIdAsync(id);
-            return this.RedirectToAction("Index", "Restaurants", new { area = string.Empty });
+            return this.RedirectToAction("All", "Movies", new { area = string.Empty });
         }
     }
 }

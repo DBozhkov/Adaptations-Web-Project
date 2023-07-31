@@ -152,9 +152,16 @@
         }
 
 
-        Task<IEnumerable<T>> IMoviesService.GetRandom<T>(int count)
+        public async Task<IEnumerable<T>> GetRandom<T>(int count)
         {
-            throw new NotImplementedException();
+            var movies = await this.movieRepository
+                .All()
+                .OrderBy(x => Guid.NewGuid())
+                .Take(count)
+                .To<T>()
+                .ToListAsync();
+
+            return movies;
         }
 
         public async Task<IEnumerable<T>> SortByNameAsync<T>(int page, int itemsPerPage = 9)

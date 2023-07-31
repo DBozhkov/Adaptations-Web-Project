@@ -83,14 +83,29 @@
             await this.booksRepository.SaveChangesAsync();
         }
 
-        public Task DeleteByIdAsync(int id)
+        public async Task DeleteByIdAsync(int? id)
         {
-            throw new NotImplementedException();
+            var book = this.booksRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
+
+            this.booksRepository.Delete(book);
+
+            await this.booksRepository.SaveChangesAsync();
         }
 
-        public Task EditAsync(int? id, EditMovieInputModel model)
+        public async Task EditAsync(int? id, EditMovieInputModel model)
         {
-            throw new NotImplementedException();
+            var book = this.booksRepository.All().FirstOrDefault(x => x.Id == id);
+            book.Title = model.MovieName;
+            book.ReleaseYear = model.ReleaseYear;
+            book.Description = model.Description;
+            book.Genre = model.Genre;
+            book.BooksSold = model.BooksSold;
+            book.Author.Name = model.AuthorName;
+            book.Author.Biography = model.AuthorBiography;
+
+            await this.booksRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllBooksAsync<T>(int page, int itemsPerPage = 9)

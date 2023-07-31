@@ -2,11 +2,14 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using System.Linq;
+    using Adaptations.Data.Models;
     using Adaptations.Data.Models.Enums;
+    using Adaptations.Services.Mapping;
+    using AutoMapper;
     using Microsoft.AspNetCore.Http;
 
-    public class DeleteMovieViewModel
+    public class DeleteMovieViewModel : IMapFrom<Movie>
     {
         public int Id { get; set; }
 
@@ -35,6 +38,16 @@
 
         public MovieGenre Genre { get; set; }
 
-        public IEnumerable<IFormFile> Images { get; set; }
+        public string ImageUrl { get; set; }
+
+        public void CreateMappings(IMapperConfigurationExpression configuration)
+        {
+            configuration.CreateMap<Movie, DeleteMovieViewModel>()
+                .ForMember(x => x.ImageUrl, opt =>
+                    opt.MapFrom(x =>
+                        x.Images.FirstOrDefault().RemoteImageUrl != null ?
+                        x.Images.FirstOrDefault().RemoteImageUrl :
+                        "/images/movies/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+        }
     }
 }

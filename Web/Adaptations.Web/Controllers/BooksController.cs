@@ -12,6 +12,7 @@
 
     public class BooksController : BaseController
     {
+        private const int ItemsPerPage = 9;
         private readonly IBooksService booksService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IHostingEnvironment environment;
@@ -63,8 +64,6 @@
                 return this.NotFound();
             }
 
-            const int ItemsPerPage = 9;
-
             var books = await this.booksService.GetAllBooksAsync<AllBooksViewModel>(id, ItemsPerPage);
 
 
@@ -76,6 +75,67 @@
                 Books = books,
             };
             return this.View(booksList);
+        }
+
+        public async Task<IActionResult> OrderByTitle(int id = 1)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("All");
+            }
+
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var orderedBooks = await this.booksService.SortByTitleAsync<AllBooksViewModel>(id, ItemsPerPage);
+
+            var orderedList = new ListAllBooks
+            {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = id,
+                Count = this.booksService.GetCount(),
+                Books = orderedBooks,
+            };
+
+            return this.RedirectToAction("OrderedBooks", orderedList);
+        }
+
+        public async Task<IActionResult> OrderByDate(int id = 1)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("All");
+            }
+
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var orderedBooks = await this.booksService.SortByAddedAsync<AllBooksViewModel>(id, ItemsPerPage);
+
+            var orderedList = new ListAllBooks
+            {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = id,
+                Count = this.booksService.GetCount(),
+                Books = orderedBooks,
+            };
+
+            return this.RedirectToAction("OrderedBooks", orderedList);
+        }
+
+        public IActionResult OrderedBooks(ListAllBooks model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("All");
+            }
+
+            var viewModel = model;
+            return this.View(viewModel);
         }
     }
 }
