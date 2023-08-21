@@ -1,15 +1,16 @@
-﻿using Adaptations.Web.ViewModels.Books;
-using Adaptations.Web.ViewModels.Movies;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Adaptations.Services.Data
+﻿namespace Adaptations.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Adaptations.Web.ViewModels.Books;
+    using Adaptations.Web.ViewModels.Movies;
+
     public interface IBooksService
     {
         Task CreateAsync(CreateBookInputModel inputMovie, string userId, string imagePath);
 
-        T GetBookAsync<T>(int id);
+        T GetBookById<T>(int id);
 
         Task<IEnumerable<T>> GetAllBooksAsync<T>(int page, int itemsPerPage = 9);
 
@@ -23,9 +24,9 @@ namespace Adaptations.Services.Data
 
         Task<IEnumerable<T>> GetBooksBySearchResult<T>(string searchResult, int page, int itemsPerPage = 9);
 
-        Task DeleteByIdAsync(int id);
+        Task DeleteByIdAsync(int? id);
 
-        Task EditAsync(int? id, EditMovieInputModel model);
+        Task EditAsync(int? id, EditBookInputModel model);
 
         Task<IEnumerable<T>> GetAllMoviesByBookId<T>(int id);
 

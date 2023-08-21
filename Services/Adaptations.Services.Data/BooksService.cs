@@ -41,6 +41,11 @@
                 AddedByUserId = userId,
             };
 
+            //if (inputBook.Characters == null)
+            //{
+            //    ingredient = new Ingredient { Name = inputIngredient.IngredientName };
+            //}
+
             if (inputBook.Characters != null && inputBook.Characters.Any())
             {
                 foreach (var characterInput in inputBook.Characters)
@@ -55,7 +60,7 @@
                 }
             }
 
-            /// wwwroot / images / movies / jhdsi - 343g3h453 -= g34g.jpg
+            /// wwwroot / images / books / jhdsi - 343g3h453 -= g34g.jpg
             Directory.CreateDirectory($"{imagePath}/books/");
             foreach (var image in inputBook.Images)
             {
@@ -94,10 +99,10 @@
             await this.booksRepository.SaveChangesAsync();
         }
 
-        public async Task EditAsync(int? id, EditMovieInputModel model)
+        public async Task EditAsync(int? id, EditBookInputModel model)
         {
             var book = this.booksRepository.All().FirstOrDefault(x => x.Id == id);
-            book.Title = model.MovieName;
+            book.Title = model.Title;
             book.ReleaseYear = model.ReleaseYear;
             book.Description = model.Description;
             book.Genre = model.Genre;
@@ -126,15 +131,18 @@
             var books = await this.booksRepository
                  .All()
                  .Where(x => x.Movie.Id == id)
+                 .Include(b => b.Characters)
                  .To<T>()
                  .ToListAsync();
 
             return books;
         }
 
-        public T GetBookAsync<T>(int id)
+        public T GetBookById<T>(int id)
         {
-            throw new NotImplementedException();
+            var book = this.booksRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+
+            return book;
         }
 
         public async Task<IEnumerable<T>> GetBooksBySearchResult<T>(string searchResult, int page, int itemsPerPage = 9)

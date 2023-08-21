@@ -40,7 +40,7 @@
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
-            configuration.CreateMap<Movie, AllMoviesViewModel>()
+            configuration.CreateMap<Movie, EditMovieInputModel>()
                 .ForMember(x => x.ImageUrl, opt =>
                     opt.MapFrom(x =>
                         x.Images.FirstOrDefault().RemoteImageUrl != null ?

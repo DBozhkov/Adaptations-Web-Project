@@ -10,10 +10,14 @@
     {
         [Required]
         [Display(Name = "Movie Name")]
+        [MinLength(2)]
+        [MaxLength(100)]
         public string MovieName { get; set; }
 
         [Required]
         [Display(Name = "Plot")]
+        [MinLength(10)]
+        [MaxLength(1000)]
         public string MoviePlot { get; set; }
 
         [Required]
@@ -22,13 +26,16 @@
 
         [Required]
         [Display(Name = "Runtime")]
+        [Range(0, 500)]
         public int RunTime { get; set; }
 
         [Required]
         [Display(Name = "Release Year")]
+        [Range(1900, 2023)]
         public int ReleaseYear { get; set; }
 
         [Required]
+        [Range(0, 10)]
         public double Rating { get; set; }
 
         public MovieGenre Genre { get; set; }

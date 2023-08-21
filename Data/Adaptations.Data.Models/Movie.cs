@@ -16,18 +16,28 @@ namespace Adaptations.Data.Models
             this.ActorsMovies = new HashSet<ActorMovie>();
         }
 
+        [Required]
+        [MaxLength(100)]
         public string MovieName { get; set; }
 
+        [Required]
+        [Range(1900, 2023)]
         public int ReleaseYear { get; set; }
 
+        [Required]
+        [MaxLength(1000)]
         public string MoviePlot { get; set; }
 
+        [Required]
+        [Range(0, 10)]
         public double Rating { get; set; }
 
         public MovieGenre Genre { get; set; }
 
         public string DirectorName { get; set; }
 
+        [Required]
+        [Range(0, 500)]
         public int RunTime { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }

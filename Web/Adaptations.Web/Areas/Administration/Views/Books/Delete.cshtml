@@ -1,19 +1,17 @@
 ﻿@using Adaptations.Data.Models.Enums
-@model Adaptations.Web.ViewModels.Books.CreateBookInputModel
+@model Adaptations.Web.ViewModels.Books.DeleteBookViewModel
 
 @{
-    this.ViewData["Title"] = "Add book";
+    this.ViewData["Title"] = "Delete Book";
 }
 
-
-<h1>Add a new Book!</h1>
-
-<form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+<form method="post" id="deleteForm">
     <h1>@this.ViewData["Title"]</h1>
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="Title">Please enter a book title:</label>
-        <input asp-for="Title" class="form-control" />
+
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" placeholder="@Model.Title" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
@@ -53,37 +51,9 @@
         <span asp-validation-for="BooksSold" class="text-danger"></span>
     </div>
 
-    <h3>Characters</h3>
-
-    <div id="CharactersContainer">
-        <label asp-for="Characters"></label>
-        <a class="btn btn-success" onclick="AddMoreCharacters()">+</a>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Images">Book images:</label>
-        <input asp-for="Images" type="file" class="form-control" multiple />
-        <span asp-validation-for="Images" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Add Book</button>
+    <button type="submit" class="btn btn-outline-warning">Delete Book</button>
 </form>
 
 @section Scripts {
-    <script>
-        var characterIndex = 0;
-        function AddMoreCharacters() {
-            $("#CharactersContainer").append(
-                "<div class='form-group'>" +
-                "<label>Name:</label> " +
-                "<input type='text' name='Characters[" + characterIndex + "].Name' class='form-control' /> " +
-                "<label>Description:</label> " +
-                "<input type='text' name='Characters[" + characterIndex + "].Description' class='form-control' />" +
-                "</div>"
-            );
-            characterIndex++;
-        }
-    </script>
-
     <partial name="_ValidationScriptsPartial" />
 }

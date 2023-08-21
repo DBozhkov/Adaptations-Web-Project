@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Adaptations.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230709163837_MakeAdditionalChangesAdaptations")]
-    partial class MakeAdditionalChangesAdaptations
+    [Migration("20230819142419_InitialCreateAdaptations")]
+    partial class InitialCreateAdaptations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -188,7 +188,9 @@ namespace Adaptations.Data.Migrations
 
                     b.Property<DateTime?>("DeletedOn");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000);
 
                     b.Property<int>("Genre");
 
@@ -200,7 +202,8 @@ namespace Adaptations.Data.Migrations
 
                     b.Property<int>("ReleaseYear");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.Property<string>("UserId");
 
@@ -294,9 +297,13 @@ namespace Adaptations.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<string>("MovieName");
+                    b.Property<string>("MovieName")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
-                    b.Property<string>("MoviePlot");
+                    b.Property<string>("MoviePlot")
+                        .IsRequired()
+                        .HasMaxLength(1000);
 
                     b.Property<double>("Rating");
 

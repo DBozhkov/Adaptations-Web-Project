@@ -57,6 +57,13 @@
             return this.RedirectToAction("All");
         }
 
+        public IActionResult BookId(int id)
+        {
+            var book = this.booksService.GetBookById<SingleBookViewModel>(id);
+
+            return this.View(book);
+        }
+
         public async Task<IActionResult> All(int id = 1)
         {
             if (id <= 0)

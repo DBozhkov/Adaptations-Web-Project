@@ -1,14 +1,12 @@
 ﻿@using Adaptations.Data.Models.Enums
-@model Adaptations.Web.ViewModels.Books.CreateBookInputModel
+@model Adaptations.Web.ViewModels.Books.EditBookInputModel
 
 @{
-    this.ViewData["Title"] = "Add book";
+    ViewData["Title"] = "Edit book";
 }
 
 
-<h1>Add a new Book!</h1>
-
-<form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+<form method="post" id="editForm">
     <h1>@this.ViewData["Title"]</h1>
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
@@ -60,27 +58,18 @@
         <a class="btn btn-success" onclick="AddMoreCharacters()">+</a>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Images">Book images:</label>
-        <input asp-for="Images" type="file" class="form-control" multiple />
-        <span asp-validation-for="Images" class="text-danger"></span>
-    </div>
+    <hr />
+    <input type="hidden" asp-for="Id" />
 
-    <button type="submit" class="btn btn-primary">Add Book</button>
+    <button type="submit" class="btn btn-primary">Edit Book</button>
 </form>
 
 @section Scripts {
     <script>
         var characterIndex = 0;
         function AddMoreCharacters() {
-            $("#CharactersContainer").append(
-                "<div class='form-group'>" +
-                "<label>Name:</label> " +
-                "<input type='text' name='Characters[" + characterIndex + "].Name' class='form-control' /> " +
-                "<label>Description:</label> " +
-                "<input type='text' name='Characters[" + characterIndex + "].Description' class='form-control' />" +
-                "</div>"
-            );
+            $("#CharactersContainer").
+                append("<div class='form-control'>Name: <input type='text' name='Characters[" + characterIndex + "].CharacterName' /> Description: <input type='text' name='Characters[" + characterIndex + "].Description' /></div>");
             characterIndex++;
         }
     </script>

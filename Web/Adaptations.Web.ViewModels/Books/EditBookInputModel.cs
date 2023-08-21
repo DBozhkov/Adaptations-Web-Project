@@ -1,17 +1,16 @@
 ﻿namespace Adaptations.Web.ViewModels.Books
 {
+    using System.Collections.Generic;
     using System.Linq;
-    using Adaptations.Data.Common.Repositories;
+
     using Adaptations.Data.Models;
     using Adaptations.Data.Models.Enums;
     using Adaptations.Services.Mapping;
     using AutoMapper;
 
-    public class AllBooksViewModel : IMapFrom<Book>, IHaveCustomMappings
+    public class EditBookInputModel : IMapFrom<Book>
     {
         public int Id { get; set; }
-
-        public string ImageUrl { get; set; }
 
         public string Title { get; set; }
 
@@ -21,19 +20,24 @@
 
         public BookGenre Genre { get; set; }
 
-        public string AuthorName { get; set; } /*=> this.booksRepository.All().Select(x => x.Author.Name).FirstOrDefault();*/
+        public string AuthorName { get; set; }
+
+        public string AuthorBiography { get; set; }
+
+        public int BooksSold { get; set; }
+
+        public IEnumerable<CharacterInputModel> Characters { get; set; }
+
+        public string ImageUrl { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
-            configuration.CreateMap<Book, AllBooksViewModel>()
+            configuration.CreateMap<Book, EditBookInputModel>()
                 .ForMember(x => x.ImageUrl, opt =>
                     opt.MapFrom(x =>
                         x.Images.FirstOrDefault().RemoteImageUrl != null ?
                         x.Images.FirstOrDefault().RemoteImageUrl :
-                        "/images/books/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
-                        .ForMember(x => x.AuthorName, opt =>
-                            opt.MapFrom(x =>
-                                x.Author.Name));
+                        "/images/books/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
         }
     }
 }
