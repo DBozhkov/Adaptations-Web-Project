@@ -8,8 +8,6 @@
 
         public string CharacterDescription { get; set; }
 
-        public virtual Actor Actor { get; set; }
-
         public virtual Book Book { get; set; }
 
         public virtual Movie Movie { get; set; }

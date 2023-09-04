@@ -37,5 +37,7 @@
         public IEnumerable<CharacterInputModel> Characters { get; set; }
 
         public IEnumerable<IFormFile> Images { get; set; }
+
+        public string MovieName { get; set; }
     }
 }

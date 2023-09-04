@@ -31,5 +31,7 @@
         Task<IEnumerable<T>> GetAllMoviesByBookId<T>(int id);
 
         bool IsSearchResultBook(string input);
+
+        int GetMovieId(int id);
     }
 }

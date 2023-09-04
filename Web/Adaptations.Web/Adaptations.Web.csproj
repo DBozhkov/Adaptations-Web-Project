@@ -218,21 +218,6 @@
     <Content Update="wwwroot\dummy\thumb-8.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\images\books\2d93a5fc-1107-48fb-adbf-936ddbebc217.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\images\books\46b3921b-7670-4f19-835c-a211941e5618.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\images\books\8c8d0e88-9507-459b-b6e6-fa72fde4c6bb.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\images\books\98d49e57-adf4-417c-bbee-dcf52bbf30d3.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\images\books\f431b3d0-54cb-4579-a5a2-8455ceba5fd9.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\images\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

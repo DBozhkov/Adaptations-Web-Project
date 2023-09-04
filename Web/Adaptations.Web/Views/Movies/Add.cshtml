@@ -53,15 +53,41 @@
         <span asp-validation-for="Rating" class="text-danger"></span>
     </div>
 
+    <div id="ActorsContainer">
+        <label asp-for="Actors"></label>
+        <a class="btn btn-success" onclick="AddMoreActors()">+</a>
+    </div>
+
     <div class="form-group">
         <label asp-for="Images"></label>
         <input asp-for="Images" class="form-control" />
         <span asp-validation-for="Images" class="text-danger"></span>
     </div>
 
+    <div class="form-group">
+        <label asp-for="BookTitle">Please enter this movie's book adaptation title:</label>
+        <input asp-for="BookTitle" class="form-control" />
+        <span asp-validation-for="BookTitle" class="text-danger"></span>
+    </div>
+
     <button type="submit" class="btn btn-primary">Add Movie</button>
 </form>
 
 @section Scripts {
+    <script>
+        var actorIndex = 0;
+        function AddMoreActors() {
+            $("#ActorsContainer").append(
+                "<div class='form-group'>" +
+                "<label>Name:</label> " +
+                "<input type='text' name='Actors[" + actorIndex + "].Name' class='form-control' /> " +
+                "<label>Biography:</label> " +
+                "<input type='textarea' name='Actors[" + actorIndex + "].Biography' class='form-control'></textarea>" +
+                "</div>"
+            );
+            actorIndex++;
+        }
+    </script>
+
     <partial name="_ValidationScriptsPartial" />
 }

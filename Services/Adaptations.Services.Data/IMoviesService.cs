@@ -16,6 +16,8 @@ namespace Adaptations.Services.Data
 
         Task<IEnumerable<T>> SortByAddedAsync<T>(int page, int itemsPerPage = 9);
 
+        int GetBookId(int id);
+
         int GetCount();
 
         Task<IEnumerable<T>> GetRandom<T>(int count);

@@ -9,7 +9,7 @@
     using Adaptations.Services.Mapping;
     using AutoMapper;
 
-    public class SingleBookViewModel : IMapFrom<Book>
+    public class SingleBookViewModel : IMapFrom<Book>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -35,6 +35,8 @@
 
         public ICollection<CharacterViewModel> Characters { get; set; }
 
+        public int MovieId { get; set; }
+
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Book, SingleBookViewModel>()
@@ -45,7 +47,10 @@
                         "/images/books/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
                 .ForMember(x => x.AuthorName, opt =>
                             opt.MapFrom(x =>
-                                x.Author.Name));
+                                x.Author.Name))
+                 .ForMember(x => x.MovieId, opt =>
+                            opt.MapFrom(x =>
+                                x.Movie.Id));
                  //.ForMember(x => x.Characters, opt =>
                  //           opt.MapFrom(x =>
                  //               x.Characters.Select(c => new CharacterViewModel

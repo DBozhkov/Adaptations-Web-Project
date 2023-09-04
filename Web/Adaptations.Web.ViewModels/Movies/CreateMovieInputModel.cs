@@ -40,6 +40,10 @@
 
         public MovieGenre Genre { get; set; }
 
+        public IEnumerable<ActorInputModel> Actors { get; set; }
+
         public IEnumerable<IFormFile> Images { get; set; }
+
+        public string BookTitle { get; set; }
     }
 }

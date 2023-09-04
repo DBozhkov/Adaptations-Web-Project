@@ -41,8 +41,25 @@
 
                     <ul class="starring">
                         <li><strong>Director:</strong> @Model.DirectorName</li>
-                        <li><strong>Stars:</strong> @Model.Actors</li>
+                        <li><strong>Stars:</strong></li>
+                        @if (Model.Actors != null && Model.Actors.Any())
+                        {
+                            @foreach (var actor in Model.Actors)
+                            {
+                                <li><a asp-controller="Actors" asp-action="ActorId" asp-route-id="@(actor.Id)">@actor.Name</a></li>
+                            }
+                        }
+                        else
+                        {
+                            <p>No actors found.</p>
+                        }
                     </ul>
+
+                    <hr />
+                    <p>
+                        This movie's book Adaptation is: '
+                        <h5 class="mt-0"><a asp-controller="Books" asp-action="BookId" asp-route-id="@(Model.BookId)">Click Here To Find Out!</a></h5>
+                    </p>
                 </div>
             </div> <!-- .row -->
             <div class="entry-content">

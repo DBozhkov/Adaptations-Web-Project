@@ -4,14 +4,16 @@ using Adaptations.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Adaptations.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230828170710_UpdateActorsTable")]
+    partial class UpdateActorsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +31,8 @@ namespace Adaptations.Data.Migrations
 
                     b.Property<DateTime>("BornOn");
 
+                    b.Property<int>("CharacterId");
+
                     b.Property<string>("Country");
 
                     b.Property<DateTime>("DiedOn");
@@ -36,6 +40,9 @@ namespace Adaptations.Data.Migrations
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CharacterId")
+                        .IsUnique();
 
                     b.ToTable("Actors");
                 });
@@ -432,6 +439,14 @@ namespace Adaptations.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Adaptations.Data.Models.Actor", b =>
+                {
+                    b.HasOne("Adaptations.Data.Models.Character", "Character")
+                        .WithOne("Actor")
+                        .HasForeignKey("Adaptations.Data.Models.Actor", "CharacterId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Adaptations.Data.Models.ActorMovie", b =>

@@ -1,13 +1,12 @@
-﻿using Adaptations.Data.Common.Models;
-using Adaptations.Data.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-
-namespace Adaptations.Data.Models
+﻿namespace Adaptations.Data.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    using Adaptations.Data.Common.Models;
+    using Adaptations.Data.Models.Enums;
+
     public class Movie : BaseDeletableModel<int>
     {
         public Movie()

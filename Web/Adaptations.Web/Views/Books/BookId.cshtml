@@ -42,7 +42,6 @@
                             <strong>Characters:</strong>
                             @if (Model.Characters != null && Model.Characters.Any())
                             {
-                                <p>Character count: @Model.Characters.Count</p>
                                 <ul>
                                     @foreach (var character in Model.Characters)
                                     {
@@ -56,6 +55,11 @@
                             }
                         </li>
                     </ul>
+
+                    <p>
+                        This book's movie Adaptation is: '
+                        <h5 class="mt-0"><a asp-controller="Movies" asp-action="MovieId" asp-route-id="@(Model.MovieId)">Click Here To Find Out!</a></h5>
+                    </p>
 
 
                 </div>

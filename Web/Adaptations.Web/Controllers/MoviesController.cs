@@ -85,6 +85,13 @@
         {
             var movie = this.moviesService.GetMovieById<SingleMovieViewModel>(id);
 
+            if (movie.BookId == 0)
+            {
+                var bookId = this.moviesService.GetBookId(id);
+
+                movie.BookId = bookId;
+            }
+
             return this.View(movie);
         }
 

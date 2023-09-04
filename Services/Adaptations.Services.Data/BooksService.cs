@@ -17,11 +17,17 @@
     {
         private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
         private readonly IDeletableEntityRepository<Book> booksRepository;
+        private readonly IDeletableEntityRepository<Movie> movieRepository;
+        private Dictionary<string, string> getMovieNames;
 
         public BooksService(
-                            IDeletableEntityRepository<Book> booksRepository)
+                            IDeletableEntityRepository<Book> booksRepository,
+                            IDeletableEntityRepository<Movie> movieRepository
+            )
         {
             this.booksRepository = booksRepository;
+            this.movieRepository = movieRepository;
+            this.getMovieNames = new Dictionary<string, string>();
         }
 
         public async Task CreateAsync(CreateBookInputModel inputBook, string userId, string imagePath)
@@ -57,6 +63,26 @@
                     };
 
                     book.Characters.Add(character);
+                }
+            }
+
+            if (inputBook.MovieName.Length > 0 && inputBook.MovieName != null)
+            {
+                var movie = this.movieRepository
+                        .All()
+                        .Where(x => x.MovieName == inputBook.MovieName)
+                        .FirstOrDefault();
+
+                if (movie != null)
+                {
+                    book.Movie = movie;
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(inputBook.MovieName))
+                    {
+                        this.getMovieNames[book.Title] = inputBook.MovieName;
+                    }
                 }
             }
 
@@ -198,6 +224,30 @@
                     .ToArrayAsync();
 
             return books;
+        }
+
+        public int GetMovieId(int id)
+        {
+            var book = this.booksRepository
+             .All()
+             .Where(x => x.Id == id)
+             .FirstOrDefault();
+
+            var movieName = this.getMovieNames[book.Title];
+
+            var movie = this.movieRepository
+                        .All()
+                        .Where(x => x.MovieName == movieName)
+                        .FirstOrDefault();
+
+            var movieId = movie.Id;
+
+            if (book.Movie.Id != movieId)
+            {
+                book.Movie = movie;
+            }
+
+            return movieId;
         }
     }
 }

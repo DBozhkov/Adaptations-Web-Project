@@ -7,6 +7,7 @@
     using Adaptations.Data.Models;
     using Adaptations.Data.Models.Enums;
     using Adaptations.Services.Mapping;
+    using Adaptations.Web.ViewModels.Books;
     using AutoMapper;
 
     public class SingleMovieViewModel : IMapFrom<Movie>, IHaveCustomMappings
@@ -33,7 +34,9 @@
 
         public string ImageUrl { get; set; }
 
-        public IEnumerable<ActorMovieViewModel> Actors { get; set; }
+        public ICollection<MovieActorViewModel> Actors { get; set; }
+
+        public int BookId { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
@@ -42,7 +45,16 @@
                     opt.MapFrom(x =>
                         x.Images.FirstOrDefault().RemoteImageUrl != null ?
                         x.Images.FirstOrDefault().RemoteImageUrl :
-                        "/images/movies/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+                        "/images/movies/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
+                .ForMember(x => x.Actors, opt =>
+                       opt.MapFrom(x => x.ActorsMovies.Select(am => new MovieActorViewModel
+                       {
+                           Id = am.Actor.Id,
+                           Name = am.Actor.Name,
+                           Biography = am.Actor.Biography,
+                       })))
+                 .ForMember(x => x.BookId, opt =>
+                        opt.MapFrom(x => x.Book.Id));
         }
     }
 }

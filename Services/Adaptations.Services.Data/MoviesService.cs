@@ -16,10 +16,16 @@
     {
         private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
         private readonly IDeletableEntityRepository<Movie> movieRepository;
+        private readonly IDeletableEntityRepository<Book> bookRepository;
+        private Dictionary<string, string> getBookTitles;
 
-        public MoviesService(IDeletableEntityRepository<Movie> movieRepository)
+        public MoviesService(
+            IDeletableEntityRepository<Movie> movieRepository,
+            IDeletableEntityRepository<Book> bookRepository)
         {
             this.movieRepository = movieRepository;
+            this.bookRepository = bookRepository;
+            this.getBookTitles = new Dictionary<string, string>();
         }
 
         public async Task CreateAsync(CreateMovieInputModel inputMovie, string userId, string imagePath)
@@ -31,8 +37,43 @@
                 MoviePlot = inputMovie.MoviePlot,
                 Genre = inputMovie.Genre,
                 Rating = inputMovie.Rating,
+                RunTime = inputMovie.RunTime,
                 AddedByUserId = userId,
             };
+
+            if (inputMovie.Actors != null && inputMovie.Actors.Any())
+            {
+                foreach (var actorInput in inputMovie.Actors)
+                {
+                    var actor = new Actor
+                    {
+                        Name = actorInput.Name,
+                        Biography = actorInput.Biography,
+                    };
+
+                    movie.ActorsMovies.Add(new ActorMovie
+                    {
+                        Actor = actor,
+                    });
+                }
+            }
+
+            if (inputMovie.BookTitle.Length > 0 && inputMovie.BookTitle != null)
+            {
+                var book = this.bookRepository
+                        .All()
+                        .Where(x => x.Title == inputMovie.BookTitle)
+                        .FirstOrDefault();
+
+                if (book != null)
+                {
+                    movie.Book = book;
+                }
+                else
+                {
+                    this.getBookTitles[movie.MovieName] = inputMovie.BookTitle;
+                }
+            }
 
             /// wwwroot / images / movies / jhdsi - 343g3h453 -= g34g.jpg
             Directory.CreateDirectory($"{imagePath}/movies/");
@@ -105,13 +146,13 @@
 
         public async Task<IEnumerable<T>> GetAllActorsByMovieId<T>(int id)
         {
-            var movies = await this.movieRepository
+            var actors = await this.movieRepository
                  .All()
                  .Where(x => x.ActorsMovies.Any(am => am.ActorId == id))
                  .To<T>()
                  .ToListAsync();
 
-            return movies;
+            return actors;
         }
 
         public async Task<IEnumerable<T>> GetAllBooksByMovieId<T>(int id)
@@ -188,6 +229,30 @@
              .ToArrayAsync();
 
             return movies;
+        }
+
+        public int GetBookId(int id)
+        {
+            var movie = this.movieRepository
+                         .All()
+                         .Where(x => x.Id == id)
+                         .FirstOrDefault();
+
+            var bookTitle = this.getBookTitles[movie.MovieName];
+
+            var book = this.bookRepository
+                        .All()
+                        .Where(x => x.Title == bookTitle)
+                        .FirstOrDefault();
+
+            var bookId = book.Id;
+
+            if (movie.Book.Id != bookId)
+            {
+                movie.Book = book;
+            }
+
+            return bookId;
         }
     }
 }

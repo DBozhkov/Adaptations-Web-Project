@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-
-namespace Adaptations.Data.Models
+﻿namespace Adaptations.Data.Models
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class ActorMovie
     {
         [ForeignKey(nameof(Actor))]

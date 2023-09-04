@@ -4,14 +4,16 @@ using Adaptations.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Adaptations.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230828142744_MakeChangesAdaptationsDatabase")]
+    partial class MakeChangesAdaptationsDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,13 +31,22 @@ namespace Adaptations.Data.Migrations
 
                     b.Property<DateTime>("BornOn");
 
+                    b.Property<int>("CharacterId");
+
                     b.Property<string>("Country");
 
                     b.Property<DateTime>("DiedOn");
 
+                    b.Property<string>("ImageId");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CharacterId")
+                        .IsUnique();
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Actors");
                 });
@@ -239,8 +250,6 @@ namespace Adaptations.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ActorId");
-
                     b.Property<string>("AddedByUserId");
 
                     b.Property<int?>("BookId");
@@ -258,8 +267,6 @@ namespace Adaptations.Data.Migrations
                     b.Property<string>("RemoteImageUrl");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActorId");
 
                     b.HasIndex("AddedByUserId");
 
@@ -434,6 +441,18 @@ namespace Adaptations.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Adaptations.Data.Models.Actor", b =>
+                {
+                    b.HasOne("Adaptations.Data.Models.Character", "Character")
+                        .WithOne("Actor")
+                        .HasForeignKey("Adaptations.Data.Models.Actor", "CharacterId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Adaptations.Data.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+                });
+
             modelBuilder.Entity("Adaptations.Data.Models.ActorMovie", b =>
                 {
                     b.HasOne("Adaptations.Data.Models.Actor", "Actor")
@@ -476,10 +495,6 @@ namespace Adaptations.Data.Migrations
 
             modelBuilder.Entity("Adaptations.Data.Models.Image", b =>
                 {
-                    b.HasOne("Adaptations.Data.Models.Actor")
-                        .WithMany("Images")
-                        .HasForeignKey("ActorId");
-
                     b.HasOne("Adaptations.Data.Models.ApplicationUser", "AddedByUser")
                         .WithMany()
                         .HasForeignKey("AddedByUserId");
