@@ -33,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Data\Adaptations.Data\Adaptations.Data.csproj" />
     <ProjectReference Include="..\Services\Adaptations.Services.Data\Adaptations.Services.Data.csproj" />
+    <ProjectReference Include="..\Services\Adaptations.Services.Messaging\Adaptations.Services.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

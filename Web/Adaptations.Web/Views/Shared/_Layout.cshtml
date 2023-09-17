@@ -40,7 +40,7 @@
     <div id="site-content">
         <header class="site-header">
             <div class="container">
-                <a href="index.html" id="branding">
+                <a asp-controller="Home" asp-action="Index" id="branding">
                     <img src="images/logo.png" alt="img" class="logo">
                     <div class="logo-copy">
                         <h1 class="site-title">Adaptations</h1>
@@ -77,8 +77,8 @@
                     </div>
 
                     <form class="search-form" asp-controller="Search" asp-action="GetResult" method="get">
-                        <input type="text" placeholder="Search..." name="searchInput">
-                        <button><i class="fa fa-search"></i></button>
+                        <input type="text" placeholder="Search..." name="searchInput" id="searchInput">
+                        <button type="submit" id="searchButton"><i class="fa fa-search"></i></button>
                     </form>
                 </div> <!-- .main-navigation -->
 

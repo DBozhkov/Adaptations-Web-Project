@@ -1,5 +1,6 @@
 ﻿@{
     this.ViewData["Title"] = "Home Page";
+    Dictionary<int, string> randDict = ViewBag.RandomDictionary;
 }
 
 <div class="page">
@@ -7,116 +8,95 @@
         <div class="col-md-9">
             <div class="slider">
                 <ul class="slides">
-                    <li><a href="#"><img src="dummy/slide-1.jpg" alt="Slide 1"></a></li>
-                    <li><a href="#"><img src="dummy/slide-2.jpg" alt="Slide 2"></a></li>
-                    <li><a href="#"><img src="dummy/slide-3.jpg" alt="Slide 3"></a></li>
+                    @{int carrCounter = 0;}
+                    @{List<int> keys = new List<int>();}
+
+                    @foreach (var item in randDict)
+                    {
+                        if (carrCounter > randDict.Keys.Count)
+                        {
+                            break;
+                        }
+
+                        if (carrCounter >= 3 || !randDict.Any())
+                        {
+                            break;
+                        };
+
+                        <li><a asp-controller="Movies" asp-action="MovieId" asp-route-id="@(item.Key)"><img src="@(item.Value)" alt="Slide 1"></a></li>
+                        carrCounter++;
+                        keys.Add(item.Key);
+                        
+                    }
+                    @for (int i = carrCounter; i < 3; i++)
+                    {
+                        <li><a href="#"><img src="dummy/slide-1.jpg" alt="Slide 1"></a></li>
+                    };
+
+                    @foreach (var key in keys)
+                    {
+                        randDict.Remove(key);
+                    }
+
                 </ul>
             </div>
         </div>
+
         <div class="col-md-3">
             <div class="row">
-                <div class="col-sm-6 col-md-12">
-                    <div class="latest-movie">
-                        <a href="#"><img src="dummy/thumb-1.jpg" alt="Movie 1"></a>
+                @{int thumbCounter = 1;}
+
+                @foreach (var item in randDict)
+                {
+                    if (thumbCounter > randDict.Keys.Count || !randDict.Any() || thumbCounter >= 3)
+                    {
+                        break;
+                    }
+
+                    <div class="col-sm-6 col-md-12">
+                        <div class="latest-movie">
+                            <a asp-controller="Movies" asp-action="MovieId" asp-route-id="@(item.Key)"><img src="@(item.Value)" alt="dummy/thumb-@(thumbCounter).jpg"></a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-md-12">
-                    <div class="latest-movie">
-                        <a href="#"><img src="dummy/thumb-2.jpg" alt="Movie 2"></a>
+                    thumbCounter++;
+                }
+                @for (int i = thumbCounter; i < 3; i++)
+                {
+                    <div class="col-sm-6 col-md-12">
+                        <div class="latest-movie">
+                            <a href="#"><img src="dummy/thumb-@(i).jpg" alt="dummy/thumb-@(i).jpg"></a>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- .row -->
-    <div class="row">
-        <div class="col-sm-6 col-md-3">
-            <div class="latest-movie">
-                <a href="#"><img src="dummy/thumb-3.jpg" alt="Movie 3"></a>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <div class="latest-movie">
-                <a href="#"><img src="dummy/thumb-4.jpg" alt="Movie 4"></a>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <div class="latest-movie">
-                <a href="#"><img src="dummy/thumb-5.jpg" alt="Movie 5"></a>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <div class="latest-movie">
-                <a href="#"><img src="dummy/thumb-6.jpg" alt="Movie 6"></a>
+                };
             </div>
         </div>
     </div> <!-- .row -->
 
     <div class="row">
-        <div class="col-md-4">
-            <h2 class="section-title">December premiere</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-            <ul class="movie-schedule">
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-            </ul> <!-- .movie-schedule -->
-        </div>
-        <div class="col-md-4">
-            <h2 class="section-title">November premiere</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-            <ul class="movie-schedule">
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-            </ul> <!-- .movie-schedule -->
-        </div>
-        <div class="col-md-4">
-            <h2 class="section-title">October premiere</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-            <ul class="movie-schedule">
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-                <li>
-                    <div class="date">16/12</div>
-                    <h2 class="entry-title"><a href="#">Perspiciatis unde omnis</a></h2>
-                </li>
-            </ul> <!-- .movie-schedule -->
-        </div>
-    </div>
+        @foreach (var item in randDict)
+        {
+            if (thumbCounter > randDict.Keys.Count || thumbCounter >= 7 || !randDict.Any())
+            {
+                break;
+            }
+
+            <div class="col-sm-6 col-md-3">
+                <div class="latest-movie">
+                    <a asp-controller="Movies" asp-action="MovieId" asp-route-id="@(item.Key)"><img src="@(item.Value)" alt="dummy/thumb-@(thumbCounter).jpg"></a>
+                </div>
+            </div>
+            thumbCounter++;
+        }
+        @for (int i = thumbCounter; i < 6; i++)
+        {
+            <div class="col-sm-6 col-md-3">
+                <div class="latest-movie">
+                    <a href="#"><img src="dummy/thumb-@(i).jpg" alt="dummy/thumb-@(i).jpg"></a>
+                </div>
+            </div>
+        };
+
+
+    </div> <!-- .row -->
+
 </div>

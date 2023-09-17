@@ -33,6 +33,7 @@
             var movie = new Movie
             {
                 MovieName = inputMovie.MovieName,
+                DirectorName = inputMovie.DirectorName,
                 ReleaseYear = inputMovie.ReleaseYear,
                 MoviePlot = inputMovie.MoviePlot,
                 Genre = inputMovie.Genre,
@@ -193,16 +194,22 @@
         }
 
 
-        public async Task<IEnumerable<T>> GetRandom<T>(int count)
+        public async Task<Dictionary<int, string>> GetRandom()
         {
-            var movies = await this.movieRepository
+            var movieIds = await this.movieRepository
                 .All()
-                .OrderBy(x => Guid.NewGuid())
-                .Take(count)
-                .To<T>()
-                .ToListAsync();
+                .Select(x => new
+                {
+                    x.Id,
+                    ImageUrl = x.Images.FirstOrDefault().RemoteImageUrl != null ?
+                         x.Images.FirstOrDefault().RemoteImageUrl :
+                         "/images/movies/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension,
+                })
+                .ToDictionaryAsync(x => x.Id, x => x.ImageUrl);
 
-            return movies;
+            var orderedIds = movieIds.OrderBy(x => Guid.NewGuid()).ToDictionary(x => x.Key, x => x.Value);
+
+            return orderedIds;
         }
 
         public async Task<IEnumerable<T>> SortByNameAsync<T>(int page, int itemsPerPage = 9)

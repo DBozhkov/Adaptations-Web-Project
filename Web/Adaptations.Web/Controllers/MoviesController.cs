@@ -117,7 +117,7 @@
                 Movies = orderedMovies,
             };
 
-            return this.RedirectToAction("OrderedMovies", orderedList);
+            return this.View("OrderedMovies", orderedList);
         }
 
         public async Task<IActionResult> OrderByDate(int id = 1)
@@ -142,7 +142,7 @@
                 Movies = orderedMovies,
             };
 
-            return this.RedirectToAction("OrderedMovies", orderedList);
+            return this.View("OrderedMovies", orderedList);
         }
 
         public IActionResult OrderedMovies(ListAllMovies model)

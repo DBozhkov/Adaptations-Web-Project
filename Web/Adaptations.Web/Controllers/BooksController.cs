@@ -113,7 +113,7 @@
                 Books = orderedBooks,
             };
 
-            return this.RedirectToAction("OrderedBooks", orderedList);
+            return this.View("OrderedBooks", orderedList);
         }
 
         public async Task<IActionResult> OrderByDate(int id = 1)
@@ -138,7 +138,7 @@
                 Books = orderedBooks,
             };
 
-            return this.RedirectToAction("OrderedBooks", orderedList);
+            return this.View("OrderedBooks", orderedList);
         }
 
         public IActionResult OrderedBooks(ListAllBooks model)

@@ -1,10 +1,11 @@
 ﻿namespace Adaptations.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
 
     public class BaseController : Controller
     {
-        public IActionResult Index()
+        public virtual async Task<IActionResult> Index()
         {
             return this.View();
         }

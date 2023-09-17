@@ -20,7 +20,7 @@ namespace Adaptations.Services.Data
 
         int GetCount();
 
-        Task<IEnumerable<T>> GetRandom<T>(int count);
+        Task<Dictionary<int, string>> GetRandom();
 
         Task<IEnumerable<T>> GetMoviesBySearchResultAsync<T>(string searchResult, int page, int itemsPerPage = 9);
 
