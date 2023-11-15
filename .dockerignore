@@ -1,0 +1,7 @@
+# .dockerignore
+
+[b|B]in
+[O|o]bj
+
+!Program.cs
+!Web/Adaptations.Web/Adaptations.Web.dll

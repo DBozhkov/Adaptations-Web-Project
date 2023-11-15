@@ -1,81 +1,60 @@
-﻿namespace Adaptations.Web.Tests
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+
+public sealed class SeleniumServerFactory<TStartup>
+    where TStartup : class
 {
-    using System;
-    using System.Diagnostics;
-    using System.Linq;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Hosting.Server.Features;
-    using Microsoft.AspNetCore.TestHost;
-    using Microsoft.Extensions.DependencyInjection;
+    private readonly Process process;
+    private IWebHost host;
 
-    namespace Adaptations.Web.Tests
+    public SeleniumServerFactory()
     {
-        public sealed class SeleniumServerFactory<TStartup>
-            where TStartup : class
+        CreateServer(CreateWebHostBuilder());
+
+        process = new Process
         {
-            private readonly Process process;
-            private IWebHost host;
-
-            public SeleniumServerFactory()
+            StartInfo = new ProcessStartInfo
             {
-                CreateServer(CreateWebHostBuilder());
-
-                process = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "selenium-standalone",
-                        Arguments = "start",
-                        UseShellExecute = true
-                    }
-                };
-                process.Start();
+                FileName = "selenium-standalone",
+                Arguments = "start",
+                UseShellExecute = true
             }
+        };
+        process.Start();
+    }
 
-            public string RootUri { get; set; }
+    public string RootUri { get; set; }
 
-            public TestServer CreateServer(IWebHostBuilder builder)
-            {
-                host = builder.Build();
-                host.Start();
-                RootUri = host.ServerFeatures.Get<IServerAddressesFeature>().Addresses.LastOrDefault(); // Last is https://localhost:5001!
+    public TestServer CreateServer(IWebHostBuilder builder)
+    {
+        host = builder.Build();
+        host.Start();
+        RootUri = host.ServerFeatures.Get<IServerAddressesFeature>().Addresses.LastOrDefault();
 
-                // Return the test server
-                return new TestServer(new WebHostBuilder()
-                    .ConfigureServices(services =>
-                    {
-                        services.AddSingleton<TStartup>(provider => host.Services.GetRequiredService<TStartup>());
-                    })
-                    .Configure(app =>
-                    {
-                        app.UseMvc();
-                    }));
-            }
+        return new TestServer(builder);
+    }
 
-            protected IWebHostBuilder CreateWebHostBuilder()
-            {
-                return new WebHostBuilder()
-                    .UseStartup<FakeStartup>();
-            }
+    protected IWebHostBuilder CreateWebHostBuilder()
+    {
+        // Use the Startup class from your application
+        return new WebHostBuilder()
+            .UseStartup<TStartup>()
+            .UseEnvironment("Development") // Set the desired environment
+            .UseConfiguration(new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build());
+    }
 
-            public void Dispose()
-            {
-                host.Dispose();
-                process.CloseMainWindow(); // Be sure to stop Selenium Standalone
-            }
-
-            public class FakeStartup
-            {
-                public void ConfigureServices(IServiceCollection services)
-                {
-                }
-
-                public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-                {
-                    app.UseMvc();
-                }
-            }
-        }
+    public void Dispose()
+    {
+        host.Dispose();
+        process.CloseMainWindow();
     }
 }

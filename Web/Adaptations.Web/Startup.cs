@@ -36,10 +36,17 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Framework services
-            // TODO: Add pooling when this bug is fixed: https://github.com/aspnet/EntityFrameworkCore/issues/9741
-            services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
+            if (this.configuration["UseInMemoryDatabase"] == "true")
+            {
+                // Use the in-memory database for testing
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseInMemoryDatabase("InMemoryDbForTesting"));
+            }
+            else
+            {
+                services.AddDbContext<ApplicationDbContext>(
+                    options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
+            }
 
             services
                 .AddIdentity<ApplicationUser, ApplicationRole>(options =>
