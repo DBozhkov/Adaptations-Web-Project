@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{E389DEB6-5F90-444B-A054-12A10D39C76F}"
 EndProject
@@ -40,9 +40,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Services.Data.Tests", "Adaptations.Services.Data.Tests\Adaptations.Services.Data.Tests.csproj", "{BF1FF52B-1A96-40DC-8AEE-5F8BD93F7197}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "﻿Adaptations.Common", "﻿Adaptations.Common\﻿Adaptations.Common.csproj", "{399CE7F9-525B-4F1E-8E3D-3456851F670A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adaptations.Web.ViewModels", "Web\Adaptations.Web.ViewModels\Adaptations.Web.ViewModels.csproj", "{5B684DC1-C40C-44D5-B958-6F865E047C1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adaptations.Web.ViewModels", "Web\Adaptations.Web.ViewModels\Adaptations.Web.ViewModels.csproj", "{5B684DC1-C40C-44D5-B958-6F865E047C1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adaptations.Common", "Adaptations.Common\Adaptations.Common.csproj", "{8DB94F46-743C-4D4F-8E62-46A4FE8386E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -98,14 +98,14 @@ Global
 		{BF1FF52B-1A96-40DC-8AEE-5F8BD93F7197}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF1FF52B-1A96-40DC-8AEE-5F8BD93F7197}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF1FF52B-1A96-40DC-8AEE-5F8BD93F7197}.Release|Any CPU.Build.0 = Release|Any CPU
-		{399CE7F9-525B-4F1E-8E3D-3456851F670A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{399CE7F9-525B-4F1E-8E3D-3456851F670A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{399CE7F9-525B-4F1E-8E3D-3456851F670A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{399CE7F9-525B-4F1E-8E3D-3456851F670A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B684DC1-C40C-44D5-B958-6F865E047C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B684DC1-C40C-44D5-B958-6F865E047C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B684DC1-C40C-44D5-B958-6F865E047C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B684DC1-C40C-44D5-B958-6F865E047C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DB94F46-743C-4D4F-8E62-46A4FE8386E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DB94F46-743C-4D4F-8E62-46A4FE8386E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DB94F46-743C-4D4F-8E62-46A4FE8386E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DB94F46-743C-4D4F-8E62-46A4FE8386E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

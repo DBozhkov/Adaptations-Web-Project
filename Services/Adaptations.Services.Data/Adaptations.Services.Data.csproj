@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Adaptations.Common\Adaptations.Common.csproj" />
     <ProjectReference Include="..\..\Data\Adaptations.Data.Common\Adaptations.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Adaptations.Data.Models\Adaptations.Data.Models.csproj" />
     <ProjectReference Include="..\..\Web\Adaptations.Web.ViewModels\Adaptations.Web.ViewModels.csproj" />

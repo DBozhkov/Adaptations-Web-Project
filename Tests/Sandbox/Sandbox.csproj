@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Adaptations.Common\Adaptations.Common.csproj" />
     <ProjectReference Include="..\..\Data\Adaptations.Data.Common\Adaptations.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Adaptations.Data.Models\Adaptations.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\Adaptations.Data\Adaptations.Data.csproj" />
@@ -39,7 +40,6 @@
     <ProjectReference Include="..\..\Services\Adaptations.Services.Mapping\Adaptations.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\Adaptations.Services.Messaging\Adaptations.Services.Messaging.csproj" />
     <ProjectReference Include="..\..\Services\Adaptations.Services\Adaptations.Services.csproj" />
-    <ProjectReference Include="..\..\﻿Adaptations.Common\﻿Adaptations.Common.csproj" />
   </ItemGroup>
 
 </Project>

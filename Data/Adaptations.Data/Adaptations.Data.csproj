@@ -50,7 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\﻿Adaptations.Common\﻿Adaptations.Common.csproj" />
+    <ProjectReference Include="..\..\Adaptations.Common\Adaptations.Common.csproj" />
     <ProjectReference Include="..\Adaptations.Data.Common\Adaptations.Data.Common.csproj" />
     <ProjectReference Include="..\Adaptations.Data.Models\Adaptations.Data.Models.csproj" />
   </ItemGroup>
